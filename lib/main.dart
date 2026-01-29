@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:test_ads/second_screen.dart';
+import 'package:test_ads/native_ad_widget.dart';
+import 'package:test_ads/app_open_ad_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +15,10 @@ void main() async {
   MobileAds.instance.updateRequestConfiguration(
     RequestConfiguration(testDeviceIds: ["E0F65D1E4F74AFD41F224BB4751E8ADE"]),
   );
+
+  // ✅ Initialize App Open Ad
+  AppOpenAdManager appOpenAdManager = AppOpenAdManager()..loadAd();
+  AppLifecycleReactor(appOpenAdManager: appOpenAdManager).listenToAppStateChanges();
 
   runApp(const MyApp());
 }
@@ -63,7 +69,12 @@ class _homeState extends State<home> {
               },
               child: const Text("Show Ad and move", style: TextStyle(fontSize: 16)),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const NativeAdWidget(),
+            const SizedBox(height: 20),
+            const NativeAdWidget(),
+
+
           ],
         ),
       ),
