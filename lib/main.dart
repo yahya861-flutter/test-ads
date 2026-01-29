@@ -1,11 +1,19 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:test_ads/second_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // ✅ Initialize AdMob BEFORE runApp
   await MobileAds.instance.initialize();
+
+  // ✅ Set test device IDs to resolve 403 errors on specific devices/emulators
+  MobileAds.instance.updateRequestConfiguration(
+    RequestConfiguration(testDeviceIds: ["E0F65D1E4F74AFD41F224BB4751E8ADE"]),
+  );
+
   runApp(const MyApp());
 }
 
@@ -31,7 +39,7 @@ class _homeState extends State<home> {
   @override
   void initState() {
     super.initState();
-    // _loadInterstitialAd();
+    _loadInterstitialAd();
   }
 
   @override
@@ -51,32 +59,24 @@ class _homeState extends State<home> {
                 ),
               ),
               onPressed: () {
-                _showInterstitialAd();
+                _showInterstitialAd(context);
               },
-              child: const Text("Show Ad", style: TextStyle(fontSize: 16)),
+              child: const Text("Show Ad and move", style: TextStyle(fontSize: 16)),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () {
-                _loadInterstitialAd();
-              },
-              child: const Text("Load Ad", style: TextStyle(fontSize: 16)),
-            ),
           ],
         ),
       ),
     );
   }
-
+// intersetion ad function
   void _loadInterstitialAd() {
+    final adUnitId = Platform.isAndroid
+        ? "ca-app-pub-3940256099942544/1033173712"
+        : "ca-app-pub-3940256099942544/4411468910";
+
     InterstitialAd.load(
-      adUnitId: "ca-app-pub-3940256099942544/1033173712",
+      adUnitId: adUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -87,12 +87,13 @@ class _homeState extends State<home> {
         },
         onAdFailedToLoad: (LoadAdError error) {
           debugPrint('Interstitial Ad failed to load: $error');
+          debugPrint('TIP: If you see "Received error HTTP response code: 403", check your logs for your device ID and add it to MobileAds.instance.updateRequestConfiguration in main.dart');
         },
       ),
     );
   }
 
-  void _showInterstitialAd() {
+  void _showInterstitialAd(BuildContext context) {
     if (_interstitialAd != null) {
 
       _interstitialAd!.fullScreenContentCallback =
@@ -103,11 +104,14 @@ class _homeState extends State<home> {
             onAdFailedToShowFullScreenContent: (ad, error) {
               debugPrint('Failed to show full screen content: $error');
               ad.dispose();
+              _loadInterstitialAd();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
             },
             onAdDismissedFullScreenContent: (ad) {
               debugPrint('Ad dismissed.');
               ad.dispose();
               _loadInterstitialAd(); // reload ad for next time
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
             },
             onAdImpression: (ad) {
               debugPrint('Ad impression recorded.');
@@ -120,6 +124,8 @@ class _homeState extends State<home> {
       // _interstitialAd = null;
     } else {
       debugPrint('Interstitial ad not ready yet');
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
     }
   }
+
 }
