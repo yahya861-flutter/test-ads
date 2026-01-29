@@ -6,6 +6,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:test_ads/third_screen.dart';
 
+import 'app_open_ad_manager.dart';
+
 class SecondScreen extends StatefulWidget {
   @override
   _SecondScreenState createState() => _SecondScreenState();
@@ -74,15 +76,20 @@ class _SecondScreenState extends State<SecondScreen> {
       return;
     }
     _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (ad) => print('Ad showed full screen content.'),
+      onAdShowedFullScreenContent: (ad) {
+        print('Ad showed full screen content.');
+        AppOpenAdManager.isOtherAdShowing = true;
+      },
       onAdDismissedFullScreenContent: (ad) {
         print('Ad dismissed full screen content.');
+        AppOpenAdManager.isOtherAdShowing = false;
         ad.dispose();
         _loadRewardedAd();
         Navigator.push(context, MaterialPageRoute(builder: (context) => ThirdScreen()));
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         print('Ad failed to show full screen content: $error');
+        AppOpenAdManager.isOtherAdShowing = false;
         ad.dispose();
         _loadRewardedAd();
         Navigator.push(context, MaterialPageRoute(builder: (context) => ThirdScreen()));

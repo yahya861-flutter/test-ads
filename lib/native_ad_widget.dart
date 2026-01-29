@@ -74,7 +74,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               minWidth: 320,
               minHeight: 90,
               maxWidth: 400,
-              maxHeight: 200,
+              maxHeight: 100,
             ),
             child: AdWidget(ad: _nativeAd!),
           )

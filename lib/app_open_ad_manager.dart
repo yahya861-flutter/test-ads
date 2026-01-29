@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AppOpenAdManager {
   AppOpenAd? _appOpenAd;
   bool _isShowingAd = false;
+  static bool isOtherAdShowing = false;
   DateTime? _loadTime;
 
   void loadAd() {
@@ -41,8 +42,8 @@ class AppOpenAdManager {
       loadAd();
       return;
     }
-    if (_isShowingAd) {
-      print('AppOpenAdManager: Already showing an ad.');
+    if (_isShowingAd || isOtherAdShowing) {
+      print('AppOpenAdManager: Already showing an ad (App Open: $_isShowingAd, Other: $isOtherAdShowing).');
       return;
     }
 

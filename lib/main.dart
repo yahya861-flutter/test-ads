@@ -69,10 +69,9 @@ class _homeState extends State<home> {
               },
               child: const Text("Show Ad and move", style: TextStyle(fontSize: 16)),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 510),
             const NativeAdWidget(),
-            const SizedBox(height: 20),
-            const NativeAdWidget(),
+
 
 
           ],
@@ -111,15 +110,18 @@ class _homeState extends State<home> {
           FullScreenContentCallback(
             onAdShowedFullScreenContent: (ad) {
               debugPrint('Ad showed full screen content.');
+              AppOpenAdManager.isOtherAdShowing = true;
             },
             onAdFailedToShowFullScreenContent: (ad, error) {
               debugPrint('Failed to show full screen content: $error');
+              AppOpenAdManager.isOtherAdShowing = false;
               ad.dispose();
               _loadInterstitialAd();
               Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
             },
             onAdDismissedFullScreenContent: (ad) {
               debugPrint('Ad dismissed.');
+              AppOpenAdManager.isOtherAdShowing = false;
               ad.dispose();
               _loadInterstitialAd(); // reload ad for next time
               Navigator.push(context, MaterialPageRoute(builder: (context) => SecondScreen()));
