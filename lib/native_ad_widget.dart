@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'native_ad_designs.dart';
 
 class NativeAdWidget extends StatefulWidget {
   final int styleIndex;
@@ -49,7 +48,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         },
       ),
       request: const AdRequest(),
-      nativeTemplateStyle: NativeAdDesigns.getStyle(widget.styleIndex, templateType: widget.templateType),
+      factoryId: 'native_ad_factory_${widget.styleIndex + 1}',
     )..load();
   }
 
@@ -82,7 +81,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     if (!_nativeAdIsLoaded || _nativeAd == null) return const SizedBox.shrink();
 
     double minHeight = widget.templateType == TemplateType.small ? 100 : 300;
-    double maxHeight = widget.templateType == TemplateType.small ? 120 : 350;
+    double maxHeight = widget.templateType == TemplateType.small ? 350 : 450;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -108,28 +107,6 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               maxHeight: maxHeight,
             ),
             child: AdWidget(ad: _nativeAd!),
-          ),
-          // Custom "Ad Info" overlay
-          Positioned.fill(
-            child: Align(
-              alignment: widget.infoPlacement,
-              child: GestureDetector(
-                onTap: () => _showAdInfo(context),
-                child: Container(
-                  margin: const EdgeInsets.all(4),
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                    size: 14,
-                  ),
-                ),
-              ),
-            ),
           ),
         ],
       ),

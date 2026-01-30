@@ -2,59 +2,114 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'native_ad_widget.dart';
 
-class NativeDesignsScreen extends StatelessWidget {
+class NativeDesignsScreen extends StatefulWidget {
   const NativeDesignsScreen({super.key});
+
+  @override
+  State<NativeDesignsScreen> createState() => _NativeDesignsScreenState();
+}
+
+class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text("Native Ads: Sizes & Placements"),
+        title: const Text("Native Ad Designs"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
       ),
-      body: ListView(
+      body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("1. Small Template - Top Right Info", style: TextStyle(fontWeight: FontWeight.bold)),
+          // Buttons Row
+          Container(
+            height: 60,
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            color: Colors.white,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemBuilder: (context, index) {
+                bool isSelected = _selectedIndex == index;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: ChoiceChip(
+                    label: Text("Design ${index + 1}"),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      if (selected) {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      }
+                    },
+                    selectedColor: Colors.green,
+                    labelStyle: TextStyle(
+                      color: isSelected ? Colors.white : Colors.black,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-          const NativeAdWidget(styleIndex: 0, templateType: TemplateType.small, infoPlacement: Alignment.topRight),
           
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("2. Small Template - Top Left Info", style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-          const NativeAdWidget(styleIndex: 2, templateType: TemplateType.small, infoPlacement: Alignment.topLeft),
+          const Divider(height: 1),
 
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("3. Medium Template - Bottom Right Info", style: TextStyle(fontWeight: FontWeight.bold)),
+          // Selected Ad Display
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Design ${_selectedIndex + 1}: ${_getDesignName(_selectedIndex)}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          "This design is loaded using custom Android XML. Click the 'i' icon to see why this ad is shown.",
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  
+                  // Key allows forcing a fresh load when switching designs
+                  KeyedSubtree(
+                    key: ValueKey('ad_$_selectedIndex'),
+                    child: NativeAdWidget(styleIndex: _selectedIndex),
+                  ),
+                ],
+              ),
+            ),
           ),
-          const NativeAdWidget(styleIndex: 1, templateType: TemplateType.medium, infoPlacement: Alignment.bottomRight),
-
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("4. Medium Template - Bottom Left Info", style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-          const NativeAdWidget(styleIndex: 4, templateType: TemplateType.medium, infoPlacement: Alignment.bottomLeft),
-
-          const Divider(),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text("More Designs...", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-          ),
-          ...List.generate(6, (index) {
-            int styleIdx = index + 3;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Text("Design $styleIdx: ${_getDesignName(styleIdx)}"),
-                ),
-                NativeAdWidget(styleIndex: styleIdx, templateType: index % 2 == 0 ? TemplateType.small : TemplateType.medium),
-              ],
-            );
-          }),
         ],
       ),
     );
@@ -62,17 +117,17 @@ class NativeDesignsScreen extends StatelessWidget {
 
   String _getDesignName(int index) {
     const names = [
-      "Default Blue",
+      "Classic Small",
       "Dark Premium",
-      "Modern Orange",
-      "Minimalist Gray",
-      "Forest Green",
-      "Luxury Gold",
-      "High Contrast",
-      "Soft Pastel",
-      "Professional Red",
-      "Night Mode"
+      "High Headline",
+      "Media Focused",
+      "Compact List",
+      "Icon on Right",
+      "Soft Purple",
+      "Gold Luxury",
+      "Minimalist Blue",
+      "High Coverage"
     ];
-    return index < names.length ? names[index] : "Unknown";
+    return index < names.length ? names[index] : "Custom Design";
   }
 }

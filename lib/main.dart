@@ -86,7 +86,6 @@ class _homeState extends State<home> {
               child: const Text("View 10 Native Designs"),
             ),
             const SizedBox(height: 10),
-            const NativeAdWidget(),
 
 
 
