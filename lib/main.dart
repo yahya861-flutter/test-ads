@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:test_ads/second_screen.dart';
 import 'package:test_ads/native_ad_widget.dart';
 import 'package:test_ads/app_open_ad_manager.dart';
+import 'package:test_ads/native_designs_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +70,22 @@ class _homeState extends State<home> {
               },
               child: const Text("Show Ad and move", style: TextStyle(fontSize: 16)),
             ),
-            const SizedBox(height: 510),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NativeDesignsScreen()),
+                );
+              },
+              child: const Text("View 10 Native Designs"),
+            ),
+            const SizedBox(height: 10),
             const NativeAdWidget(),
 
 

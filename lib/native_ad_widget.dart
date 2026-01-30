@@ -1,9 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'native_ad_designs.dart';
 
 class NativeAdWidget extends StatefulWidget {
-  const NativeAdWidget({super.key});
+  final int styleIndex;
+  final TemplateType templateType;
+  final Alignment infoPlacement;
+
+  const NativeAdWidget({
+    super.key,
+    this.styleIndex = 0,
+    this.templateType = TemplateType.small,
+    this.infoPlacement = Alignment.topRight,
+  });
 
   @override
   State<NativeAdWidget> createState() => _NativeAdWidgetState();
@@ -28,7 +38,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
       adUnitId: _adUnitId,
       listener: NativeAdListener(
         onAdLoaded: (ad) {
-          debugPrint('$NativeAd loaded.');
+          debugPrint('$NativeAd loaded with style index: ${widget.styleIndex}');
           setState(() {
             _nativeAdIsLoaded = true;
           });
@@ -39,24 +49,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         },
       ),
       request: const AdRequest(),
-      // Styling
-      nativeTemplateStyle: NativeTemplateStyle(
-        templateType: TemplateType.small,
-        mainBackgroundColor: Colors.white,
-        cornerRadius: 10.0,
-        callToActionTextStyle: NativeTemplateTextStyle(
-          textColor: Colors.white,
-          backgroundColor: Colors.blue,
-          style: NativeTemplateFontStyle.bold,
-          size: 16.0,
-        ),
-        primaryTextStyle: NativeTemplateTextStyle(
-          textColor: Colors.black,
-          backgroundColor: Colors.white,
-          style: NativeTemplateFontStyle.bold,
-          size: 16.0,
-        ),
-      ),
+      nativeTemplateStyle: NativeAdDesigns.getStyle(widget.styleIndex, templateType: widget.templateType),
     )..load();
   }
 
@@ -66,18 +59,80 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     super.dispose();
   }
 
+  void _showAdInfo(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Why you see this ad"),
+        content: const Text(
+          "This ad is shown based on test configurations. In a real app, ads are personalized by Google based on your interests and activity.",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _nativeAdIsLoaded && _nativeAd != null
-        ? ConstrainedBox(
-            constraints: const BoxConstraints(
+    if (!_nativeAdIsLoaded || _nativeAd == null) return const SizedBox.shrink();
+
+    double minHeight = widget.templateType == TemplateType.small ? 100 : 300;
+    double maxHeight = widget.templateType == TemplateType.small ? 120 : 350;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          // The Ad
+          ConstrainedBox(
+            constraints: BoxConstraints(
               minWidth: 320,
-              minHeight: 90,
+              minHeight: minHeight,
               maxWidth: 400,
-              maxHeight: 100,
+              maxHeight: maxHeight,
             ),
             child: AdWidget(ad: _nativeAd!),
-          )
-        : const SizedBox.shrink();
+          ),
+          // Custom "Ad Info" overlay
+          Positioned.fill(
+            child: Align(
+              alignment: widget.infoPlacement,
+              child: GestureDetector(
+                onTap: () => _showAdInfo(context),
+                child: Container(
+                  margin: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.info_outline,
+                    color: Colors.white,
+                    size: 14,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
