@@ -85,16 +85,16 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
 
     if (widget.styleIndex % 3 == 0) {
       // Small
-      minHeight = 100;
-      maxHeight = 270;
+      minHeight = 80;
+      maxHeight = 180;
     } else if (widget.styleIndex % 3 == 1) {
       // Medium
-      minHeight = 300;
-      maxHeight = 450;
+      minHeight = 180;
+      maxHeight = 320;
     } else {
       // Large
-      minHeight = 450;
-      maxHeight = 600;
+      minHeight = 320;
+      maxHeight = 450;
     }
 
     return Container(

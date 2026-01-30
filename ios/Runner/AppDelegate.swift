@@ -72,7 +72,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .red)
         adView.headlineView = headline
         
-        let media = createMediaView(160, adView: adView)
+        let media = createMediaView(100, adView: adView)
         let body = createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: .black, lines: 2)
         adView.bodyView = body
         
@@ -93,7 +93,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 18), color: .white)
         adView.headlineView = headline
         
-        let media = createMediaView(250, adView: adView)
+        let media = createMediaView(180, adView: adView)
         
         let cta = createButton(nativeAd.callToAction, bgColor: .systemOrange)
         adView.callToActionView = cta
@@ -110,7 +110,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 22), color: .black)
         adView.headlineView = headline
         
-        let media = createMediaView(350, adView: adView)
+        let media = createMediaView(260, adView: adView)
         
         let body = createLabel(nativeAd.body, font: .systemFont(ofSize: 14), color: .darkGray, lines: 4)
         adView.bodyView = body
@@ -126,7 +126,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
 
     private func setupMediaHighDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
         let mainStack = createMainStack(container, padding: 0, spacing: 0)
-        let media = createMediaView(150, adView: adView)
+        let media = createMediaView(100, adView: adView)
         let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .black)
         headline.textAlignment = .center
         adView.headlineView = headline
@@ -140,7 +140,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let mainStack = createMainStack(container, spacing: 10)
         
         let header = createHeaderStack(nativeAd, adView: adView)
-        let media = createMediaView(200, adView: adView)
+        let media = createMediaView(170, adView: adView)
         let cta = createButton(nativeAd.callToAction, bgColor: .lightGray)
         adView.callToActionView = cta
         
@@ -156,7 +156,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let headline = createLabel(nativeAd.headline, font: .italicSystemFont(ofSize: 24), color: .gold)
         adView.headlineView = headline
         
-        let media = createMediaView(320, adView: adView)
+        let media = createMediaView(260, adView: adView)
         let cta = createButton(nativeAd.callToAction, bgColor: .gold)
         adView.callToActionView = cta
         
@@ -181,7 +181,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
     private func setupRetroDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
         adView.backgroundColor = .systemYellow
         let mainStack = createMainStack(container)
-        let media = createMediaView(220, adView: adView)
+        let media = createMediaView(180, adView: adView)
         let cta = createButton(nativeAd.callToAction, bgColor: .brown)
         adView.callToActionView = cta
         
@@ -194,16 +194,19 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         let mainStack = createMainStack(container, spacing: 25)
         let headline = createLabel(nativeAd.headline, font: .systemFont(ofSize: 26), color: .white)
         adView.headlineView = headline
-        let media = createMediaView(340, adView: adView)
-        adView.callToActionView = createButton(nativeAd.callToAction, bgColor: .white)
+        let media = createMediaView(260, adView: adView)
+        
+        let cta = createButton(nativeAd.callToAction, bgColor: .white)
+        cta.setTitleColor(.systemTeal, for: .normal)
+        adView.callToActionView = cta
         
         mainStack.addArrangedSubview(headline)
         mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(adView.callToActionView!)
+        mainStack.addArrangedSubview(cta)
     }
 
     private func setupFullMediaDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        let media = createMediaView(300, adView: adView)
+        let media = createMediaView(150, adView: adView)
         container.addSubview(media)
         NSLayoutConstraint.activate([
             media.topAnchor.constraint(equalTo: container.topAnchor),
