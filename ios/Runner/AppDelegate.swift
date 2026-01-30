@@ -151,12 +151,12 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
 
     private func setupLuxuryDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
         adView.backgroundColor = .black
-        let mainStack = createMainStack(container, spacing: 20)
+        let mainStack = createMainStack(container, spacing: 10)
         
-        let headline = createLabel(nativeAd.headline, font: .italicSystemFont(ofSize: 24), color: .gold)
+        let headline = createLabel(nativeAd.headline, font: .italicSystemFont(ofSize: 20), color: .gold)
         adView.headlineView = headline
         
-        let media = createMediaView(260, adView: adView)
+        let media = createMediaView(220, adView: adView) // Adjusted Large height
         let cta = createButton(nativeAd.callToAction, bgColor: .gold)
         adView.callToActionView = cta
         
