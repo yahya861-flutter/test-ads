@@ -117,16 +117,16 @@ class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
 
   String _getDesignName(int index) {
     const names = [
-      "Classic Small",
-      "Dark Premium",
-      "High Headline",
-      "Media Focused",
-      "Compact List",
-      "Icon on Right",
-      "Soft Purple",
-      "Gold Luxury",
-      "Minimalist Blue",
-      "High Coverage"
+      "Classic (Small)",
+      "Dark Premium (Medium)",
+      "High Headline (Large)",
+      "Media Focused (Small)",
+      "Compact List (Medium)",
+      "Icon on Right (Large)",
+      "Soft Purple (Small)",
+      "Gold Luxury (Medium)",
+      "Minimalist Blue (Large)",
+      "High Coverage (Small)"
     ];
     return index < names.length ? names[index] : "Custom Design";
   }

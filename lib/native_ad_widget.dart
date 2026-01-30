@@ -80,8 +80,22 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
   Widget build(BuildContext context) {
     if (!_nativeAdIsLoaded || _nativeAd == null) return const SizedBox.shrink();
 
-    double minHeight = widget.templateType == TemplateType.small ? 100 : 300;
-    double maxHeight = widget.templateType == TemplateType.small ? 350 : 450;
+    double minHeight;
+    double maxHeight;
+
+    if (widget.styleIndex % 3 == 0) {
+      // Small
+      minHeight = 100;
+      maxHeight = 270;
+    } else if (widget.styleIndex % 3 == 1) {
+      // Medium
+      minHeight = 300;
+      maxHeight = 450;
+    } else {
+      // Large
+      minHeight = 450;
+      maxHeight = 600;
+    }
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
