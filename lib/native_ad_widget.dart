@@ -83,18 +83,50 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     double minHeight;
     double maxHeight;
 
-    if (widget.styleIndex % 3 == 0) {
-      // Small
-      minHeight = 80;
-      maxHeight = 380;
-    } else if (widget.styleIndex % 3 == 1) {
-      // Medium
-      minHeight = 180;
-      maxHeight = 320;
-    } else {
-      // Large
-      minHeight = 320;
-      maxHeight = 450;
+    switch (widget.styleIndex) {
+      case 0: // Design 1: Classic
+        minHeight = 80;
+        maxHeight = 450;
+        break;
+      case 1: // Design 2: Dark
+        minHeight = 150;
+        maxHeight = 280;
+        break;
+      case 2: // Design 3: High Headline
+        minHeight = 250;
+        maxHeight = 350;
+        break;
+      case 3: // Design 4: Media Focused
+        minHeight = 100;
+        maxHeight = 180;
+        break;
+      case 4: // Design 5: Compact List (No Media)
+        minHeight = 80;
+        maxHeight = 80;
+        break;
+      case 5: // Design 6: Icon Right (No Media)
+        minHeight = 100;
+        maxHeight = 120;
+        break;
+      case 6: // Design 7: Purple
+        minHeight = 150;
+        maxHeight = 250;
+        break;
+      case 7: // Design 8: Luxury
+        minHeight = 200;
+        maxHeight = 350;
+        break;
+      case 8: // Design 9: Modern
+        minHeight = 280;
+        maxHeight = 320;
+        break;
+      case 9: // Design 10: Full Media
+        minHeight = 180;
+        maxHeight = 300;
+        break;
+      default:
+        minHeight = 150;
+        maxHeight = 350;
     }
 
     return Container(

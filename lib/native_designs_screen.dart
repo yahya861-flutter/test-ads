@@ -84,7 +84,7 @@ class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Design ${_selectedIndex + 1}: ${_getDesignName(_selectedIndex)}",
+                          "Design ${_selectedIndex + 1}",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -115,19 +115,5 @@ class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
     );
   }
 
-  String _getDesignName(int index) {
-    const names = [
-      "Classic (Small)",
-      "Dark Premium (Medium)",
-      "High Headline (Large)",
-      "Media Focused (Small)",
-      "Compact List (Medium)",
-      "Icon on Right (Large)",
-      "Soft Purple (Small)",
-      "Gold Luxury (Medium)",
-      "Minimalist Blue (Large)",
-      "High Coverage (Small)"
-    ];
-    return index < names.length ? names[index] : "Custom Design";
-  }
+
 }
