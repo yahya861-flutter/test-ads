@@ -33,7 +33,7 @@ class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
           // Buttons Row
           Container(
             height: 60,
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            //padding: const EdgeInsets.symmetric(vertical: 8),
             color: cardColor,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -70,7 +70,6 @@ class _NativeDesignsScreenState extends State<NativeDesignsScreen> {
           // Selected Ad Display
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
