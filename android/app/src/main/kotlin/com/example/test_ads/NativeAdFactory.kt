@@ -68,24 +68,6 @@ class MyNativeAdFactory(private val layoutInflater: LayoutInflater, private val 
             adView.advertiserView?.visibility = View.VISIBLE
         }
 
-        // Price
-        adView.priceView = adView.findViewById(R.id.ad_price)
-        if (nativeAd.price == null) {
-            adView.priceView?.visibility = View.INVISIBLE
-        } else {
-            (adView.priceView as? TextView)?.text = nativeAd.price
-            adView.priceView?.visibility = View.VISIBLE
-        }
-
-        // Store
-        adView.storeView = adView.findViewById(R.id.ad_store)
-        if (nativeAd.store == null) {
-            adView.storeView?.visibility = View.INVISIBLE
-        } else {
-            (adView.storeView as? TextView)?.text = nativeAd.store
-            adView.storeView?.visibility = View.VISIBLE
-        }
-
         // Media
         adView.mediaView = adView.findViewById(R.id.ad_media) as? MediaView
 

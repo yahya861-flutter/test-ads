@@ -86,7 +86,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     switch (widget.styleIndex) {
       case 0: // Design 1: Classic
         minHeight = 80;
-        maxHeight = 450;
+        maxHeight = 270;
         break;
       case 1: // Design 2: Dark
         minHeight = 150;

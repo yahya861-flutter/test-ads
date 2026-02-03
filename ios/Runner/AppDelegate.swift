@@ -47,177 +47,25 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         ])
 
         switch styleIndex {
-        case 1: setupClassicDesign(container, adView, nativeAd: nativeAd) // 380
-        case 2: setupDarkDesign(container, adView, nativeAd: nativeAd)    // 300
-        case 3: setupLightDesign(container, adView, nativeAd: nativeAd)   // 420
-        case 4: setupMediaHighDesign(container, adView, nativeAd: nativeAd) // 250
-        case 5: setupCompactDesign(container, adView, nativeAd: nativeAd)   // 280
-        case 6: setupLuxuryDesign(container, adView, nativeAd: nativeAd)   // 450
-        case 7: setupColorfulDesign(container, adView, nativeAd: nativeAd)  // 260
-        case 8: setupRetroDesign(container, adView, nativeAd: nativeAd)    // 350
-        case 9: setupModernDesign(container, adView, nativeAd: nativeAd)   // 480
-        case 10: setupFullMediaDesign(container, adView, nativeAd: nativeAd) // 300
-        default: setupClassicDesign(container, adView, nativeAd: nativeAd)
+        case 1: NativeAdDesign1.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 2: NativeAdDesign2.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 3: NativeAdDesign3.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 4: NativeAdDesign4.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 5: NativeAdDesign5.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 6: NativeAdDesign6.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 7: NativeAdDesign7.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 8: NativeAdDesign8.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 9: NativeAdDesign9.setup(container, adView, nativeAd: nativeAd, factory: self)
+        case 10: NativeAdDesign10.setup(container, adView, nativeAd: nativeAd, factory: self)
+        default: NativeAdDesign1.setup(container, adView, nativeAd: nativeAd, factory: self)
         }
         
         adView.nativeAd = nativeAd
         return adView
     }
 
-    private func setupClassicDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .white
-        let mainStack = createMainStack(container)
-        
-        let header = createHeaderStack(nativeAd, adView: adView)
-        let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .red)
-        adView.headlineView = headline
-        
-        let media = createMediaView(220, adView: adView)
-        let body = createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: .black, lines: 2)
-        adView.bodyView = body
-        
-        let cta = createButton(nativeAd.callToAction, bgColor: .systemBlue)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(header)
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(body)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupDarkDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
-        let mainStack = createMainStack(container)
-        
-        let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 18), color: .white)
-        adView.headlineView = headline
-        
-        let media = createMediaView(150, adView: adView)
-        
-        let cta = createButton(nativeAd.callToAction, bgColor: .systemOrange)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupLightDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        let mainStack = createMainStack(container, spacing: 10)
-        
-        let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 22), color: .black)
-        adView.headlineView = headline
-        
-        let media = createMediaView(220, adView: adView)
-        
-        let body = createLabel(nativeAd.body, font: .systemFont(ofSize: 14), color: .darkGray, lines: 3)
-        adView.bodyView = body
-        
-        let cta = createButton(nativeAd.callToAction, bgColor: .black)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(body)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupMediaHighDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        let mainStack = createMainStack(container, padding: 0, spacing: 0)
-        let media = createMediaView(140, adView: adView)
-        let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .black)
-        headline.textAlignment = .center
-        adView.headlineView = headline
-        
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(headline)
-    }
-
-    private func setupCompactDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .white
-        let mainStack = createMainStack(container, spacing: 8)
-        
-        let header = createHeaderStack(nativeAd, adView: adView)
-        let media = createMediaView(120, adView: adView)
-        let cta = createButton(nativeAd.callToAction, bgColor: .lightGray)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(header)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupLuxuryDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .black
-        let mainStack = createMainStack(container, spacing: 10)
-        
-        let headline = createLabel(nativeAd.headline, font: .italicSystemFont(ofSize: 20), color: .gold)
-        adView.headlineView = headline
-        
-        let media = createMediaView(250, adView: adView)
-        let cta = createButton(nativeAd.callToAction, bgColor: .gold)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupColorfulDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .systemPink
-        let mainStack = createMainStack(container)
-        let headline = createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .white)
-        adView.headlineView = headline
-        let cta = createButton(nativeAd.callToAction, bgColor: .white)
-        cta.setTitleColor(.systemPink, for: .normal)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupRetroDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .systemYellow
-        let mainStack = createMainStack(container)
-        let media = createMediaView(150, adView: adView) // Adjusted
-        let cta = createButton(nativeAd.callToAction, bgColor: .brown)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupModernDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        adView.backgroundColor = .systemTeal
-        let mainStack = createMainStack(container, spacing: 20)
-        let headline = createLabel(nativeAd.headline, font: .systemFont(ofSize: 24), color: .white)
-        adView.headlineView = headline
-        let media = createMediaView(280, adView: adView) // Adjusted
-        
-        let cta = createButton(nativeAd.callToAction, bgColor: .white)
-        cta.setTitleColor(.systemTeal, for: .normal)
-        adView.callToActionView = cta
-        
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(cta)
-    }
-
-    private func setupFullMediaDesign(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd) {
-        let media = createMediaView(180, adView: adView) // Adjusted
-        container.addSubview(media)
-        NSLayoutConstraint.activate([
-            media.topAnchor.constraint(equalTo: container.topAnchor),
-            media.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            media.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            media.bottomAnchor.constraint(equalTo: container.bottomAnchor)
-        ])
-    }
-
     // Helper Factory Methods
-    private func createMainStack(_ container: UIView, padding: CGFloat = 12, spacing: CGFloat = 8) -> UIStackView {
+    func createMainStack(_ container: UIView, padding: CGFloat = 12, spacing: CGFloat = 8) -> UIStackView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = spacing
@@ -232,7 +80,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         return stack
     }
 
-    private func createHeaderStack(_ nativeAd: NativeAd, adView: NativeAdView) -> UIStackView {
+    func createHeaderStack(_ nativeAd: NativeAd, adView: NativeAdView) -> UIStackView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 10
@@ -258,7 +106,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         return stack
     }
 
-    private func createMediaView(_ height: CGFloat, adView: NativeAdView) -> MediaView {
+    func createMediaView(_ height: CGFloat, adView: NativeAdView) -> MediaView {
         let media = MediaView()
         media.translatesAutoresizingMaskIntoConstraints = false
         media.heightAnchor.constraint(equalToConstant: height).isActive = true
@@ -266,7 +114,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         return media
     }
 
-    private func createLabel(_ text: String?, font: UIFont, color: UIColor, lines: Int = 1) -> UILabel {
+    func createLabel(_ text: String?, font: UIFont, color: UIColor, lines: Int = 1) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = font
@@ -276,7 +124,7 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         return label
     }
 
-    private func createButton(_ title: String?, bgColor: UIColor) -> UIButton {
+    func createButton(_ title: String?, bgColor: UIColor) -> UIButton {
         let btn = UIButton(type: .system)
         btn.setTitle(title, for: .normal)
         btn.backgroundColor = bgColor
@@ -290,4 +138,155 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
 
 extension UIColor {
     static var gold: UIColor { return UIColor(red: 212/255, green: 175/255, blue: 55/255, alpha: 1) }
+}
+
+// MARK: - Ad Designs
+
+class NativeAdDesign1 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = .white
+        let mainStack = factory.createMainStack(container)
+        let header = factory.createHeaderStack(nativeAd, adView: adView)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .red)
+        adView.headlineView = headline
+        let media = factory.createMediaView(220, adView: adView)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: .black, lines: 2)
+        adView.bodyView = body
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .systemBlue)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(header)
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(body)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign2 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        let mainStack = factory.createMainStack(container)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 18), color: .white)
+        adView.headlineView = headline
+        let media = factory.createMediaView(150, adView: adView)
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .systemOrange)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign3 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        let mainStack = factory.createMainStack(container, spacing: 10)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 22), color: .black)
+        adView.headlineView = headline
+        let media = factory.createMediaView(220, adView: adView)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 14), color: .darkGray, lines: 3)
+        adView.bodyView = body
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .black)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(body)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign4 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        let mainStack = factory.createMainStack(container, padding: 0, spacing: 0)
+        let media = factory.createMediaView(140, adView: adView)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .black)
+        headline.textAlignment = .center
+        adView.headlineView = headline
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(headline)
+    }
+}
+
+class NativeAdDesign5 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = .white
+        let mainStack = factory.createMainStack(container, spacing: 8)
+        let header = factory.createHeaderStack(nativeAd, adView: adView)
+        let media = factory.createMediaView(120, adView: adView)
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .lightGray)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(header)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign6 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = .black
+        let mainStack = factory.createMainStack(container, spacing: 10)
+        let headline = factory.createLabel(nativeAd.headline, font: .italicSystemFont(ofSize: 20), color: .gold)
+        adView.headlineView = headline
+        let media = factory.createMediaView(250, adView: adView)
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .gold)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign7 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = UIColor.systemPink
+        let mainStack = factory.createMainStack(container)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .white)
+        adView.headlineView = headline
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .white)
+        cta.setTitleColor(UIColor.systemPink, for: UIControl.State.normal)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign8 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = .systemYellow
+        let mainStack = factory.createMainStack(container)
+        let media = factory.createMediaView(150, adView: adView)
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .brown)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign9 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        adView.backgroundColor = UIColor.systemTeal
+        let mainStack = factory.createMainStack(container, spacing: 20)
+        let headline = factory.createLabel(nativeAd.headline, font: .systemFont(ofSize: 24), color: .white)
+        adView.headlineView = headline
+        let media = factory.createMediaView(280, adView: adView)
+        let cta = factory.createButton(nativeAd.callToAction, bgColor: .white)
+        cta.setTitleColor(UIColor.systemTeal, for: UIControl.State.normal)
+        adView.callToActionView = cta
+        mainStack.addArrangedSubview(headline)
+        mainStack.addArrangedSubview(media)
+        mainStack.addArrangedSubview(cta)
+    }
+}
+
+class NativeAdDesign10 {
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        let media = factory.createMediaView(180, adView: adView)
+        container.addSubview(media)
+        NSLayoutConstraint.activate([
+            media.topAnchor.constraint(equalTo: container.topAnchor),
+            media.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            media.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            media.bottomAnchor.constraint(equalTo: container.bottomAnchor)
+        ])
+    }
 }
