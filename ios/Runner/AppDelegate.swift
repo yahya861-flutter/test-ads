@@ -1150,21 +1150,22 @@ class NativeAdDesign4Dark {
 
 class NativeAdDesign5Dark {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
-        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        // Root background #121212
+        adView.backgroundColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1)
         
         let mainStack = UIStackView()
         mainStack.axis = .horizontal
         mainStack.alignment = .center
         mainStack.spacing = 0
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-        mainStack.backgroundColor = UIColor(white: 0.15, alpha: 1)
+        mainStack.backgroundColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1)
         container.addSubview(mainStack)
         
         NSLayoutConstraint.activate([
-            mainStack.topAnchor.constraint(equalTo: container.topAnchor, constant: 8),
-            mainStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 8),
-            mainStack.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -8),
-            mainStack.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8)
+            mainStack.topAnchor.constraint(equalTo: container.topAnchor, constant: 0),
+            mainStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 0),
+            mainStack.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 0),
+            mainStack.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 0)
         ])
 
         let iconContainer = UIView()
@@ -1242,41 +1243,32 @@ class NativeAdDesign5Dark {
 
 class NativeAdDesign6Dark {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
-        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        // Root background #121212
+        adView.backgroundColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1)
         
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = UIColor(white: 0.15, alpha: 1)
-        container.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: container.topAnchor, constant: 0),
-            containerView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 0),
-            containerView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 0),
-            containerView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 0)
-        ])
-
+        // App Icon (60dp, alignParentEnd)
         let iconView = factory.createIconView(nativeAd, adView: adView)
         iconView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         iconView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        containerView.addSubview(iconView)
+        container.addSubview(iconView)
         
         NSLayoutConstraint.activate([
-            iconView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            iconView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            iconView.topAnchor.constraint(equalTo: container.topAnchor, constant: 12),
+            iconView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12)
         ])
 
+        // Text Container (Headline + Body, toStartOf icon)
         let textStack = UIStackView()
         textStack.axis = .vertical
         textStack.spacing = 4
         textStack.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(textStack)
+        container.addSubview(textStack)
         
         let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 17), color: .white)
         headline.numberOfLines = 1
         adView.headlineView = headline
         
-        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: .lightGray)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: UIColor(white: 0.7, alpha: 1))
         body.numberOfLines = 2
         adView.bodyView = body
         
@@ -1284,21 +1276,22 @@ class NativeAdDesign6Dark {
         textStack.addArrangedSubview(body)
         
         NSLayoutConstraint.activate([
-            textStack.topAnchor.constraint(equalTo: containerView.topAnchor),
-            textStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            textStack.topAnchor.constraint(equalTo: container.topAnchor, constant: 12),
+            textStack.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
             textStack.trailingAnchor.constraint(equalTo: iconView.leadingAnchor, constant: -12)
         ])
 
+        // CTA Button (Full width, below text_container)
         let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: UIColor(red: 30/255, green: 155/255, blue: 233/255, alpha: 1))
-        ctaButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        ctaButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         adView.callToActionView = ctaButton
-        containerView.addSubview(ctaButton)
+        container.addSubview(ctaButton)
         
         NSLayoutConstraint.activate([
             ctaButton.topAnchor.constraint(equalTo: textStack.bottomAnchor, constant: 20),
-            ctaButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            ctaButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            ctaButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            ctaButton.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            ctaButton.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            ctaButton.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
     }
 }
