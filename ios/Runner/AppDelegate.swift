@@ -22,6 +22,8 @@ import google_mobile_ads
   }
 }
 
+// MARK: - Native Ad Factory
+
 class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
     let styleIndex: Int
 
@@ -32,9 +34,8 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
 
     func createNativeAd(_ nativeAd: NativeAd, customOptions: [AnyHashable : Any]?) -> NativeAdView? {
         let adView = NativeAdView()
-        adView.translatesAutoresizingMaskIntoConstraints = false
+        // Removed: adView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Root padding container
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
         adView.addSubview(container)
@@ -86,15 +87,9 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         stack.spacing = 10
         stack.alignment = .center
         
-        let icon = UIImageView()
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.image = nativeAd.icon?.image
-        icon.contentMode = .scaleAspectFill
-        icon.layer.cornerRadius = 8
-        icon.clipsToBounds = true
+        let icon = createIconView(nativeAd, adView: adView)
         icon.widthAnchor.constraint(equalToConstant: 40).isActive = true
         icon.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        adView.iconView = icon
         
         let titleStack = UIStackView()
         titleStack.axis = .vertical
@@ -104,6 +99,17 @@ class MyNativeAdFactory: NSObject, FLTNativeAdFactory {
         stack.addArrangedSubview(icon)
         stack.addArrangedSubview(titleStack)
         return stack
+    }
+
+    func createIconView(_ nativeAd: NativeAd, adView: NativeAdView) -> UIImageView {
+        let icon = UIImageView()
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.image = nativeAd.icon?.image
+        icon.contentMode = .scaleAspectFill
+        icon.layer.cornerRadius = 8
+        icon.clipsToBounds = true
+        adView.iconView = icon
+        return icon
     }
 
     func createMediaView(_ height: CGFloat, adView: NativeAdView) -> MediaView {
@@ -144,23 +150,90 @@ extension UIColor {
 
 class NativeAdDesign1 {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
-        adView.backgroundColor = .white
-        let mainStack = factory.createMainStack(container)
-        let header = factory.createHeaderStack(nativeAd, adView: adView)
-        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .red)
-        adView.headlineView = headline
-        let media = factory.createMediaView(220, adView: adView)
-        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 13), color: .black, lines: 2)
-        adView.bodyView = body
-        let cta = factory.createButton(nativeAd.callToAction, bgColor: .systemBlue)
-        adView.callToActionView = cta
-        mainStack.addArrangedSubview(header)
-        mainStack.addArrangedSubview(headline)
-        mainStack.addArrangedSubview(media)
-        mainStack.addArrangedSubview(body)
-        mainStack.addArrangedSubview(cta)
+        adView.backgroundColor = UIColor(red: 0.929, green: 0.937, blue: 0.949, alpha: 1)
+
+        let mainStack = factory.createMainStack(container, padding: 12, spacing: 12)
+
+        // Header
+        let headerStack = UIStackView()
+        headerStack.axis = .horizontal
+        headerStack.distribution = .equalSpacing
+        headerStack.alignment = .center
+
+        // Left: Icon + Headline
+        let leftStack = UIStackView()
+        leftStack.axis = .horizontal
+        leftStack.alignment = .center
+        leftStack.spacing = 10
+
+        let iconContainer = UIView()
+        iconContainer.layer.cornerRadius = 20
+        iconContainer.clipsToBounds = true
+        iconContainer.backgroundColor = .white
+        iconContainer.translatesAutoresizingMaskIntoConstraints = false
+        iconContainer.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        iconContainer.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        let iconView = factory.createIconView(nativeAd, adView: adView)
+        iconContainer.addSubview(iconView)
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            iconView.topAnchor.constraint(equalTo: iconContainer.topAnchor, constant: 2),
+            iconView.bottomAnchor.constraint(equalTo: iconContainer.bottomAnchor, constant: -2),
+            iconView.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor, constant: 2),
+            iconView.trailingAnchor.constraint(equalTo: iconContainer.trailingAnchor, constant: -2)
+        ])
+
+        let headlineLabel = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 14), color: .black)
+        adView.headlineView = headlineLabel
+
+        leftStack.addArrangedSubview(iconContainer)
+        leftStack.addArrangedSubview(headlineLabel)
+
+        // Right: Badge + Advertiser
+        let rightStack = UIStackView()
+        rightStack.axis = .horizontal
+        rightStack.spacing = 6
+        rightStack.alignment = .center
+
+        let badgeLabel = UILabel()
+        badgeLabel.text = "Ad"
+        badgeLabel.font = .boldSystemFont(ofSize: 10)
+        badgeLabel.textColor = UIColor(red: 0.22, green: 0.56, blue: 0.76, alpha: 1)
+        badgeLabel.layer.borderWidth = 1
+        badgeLabel.layer.borderColor = badgeLabel.textColor.cgColor
+        badgeLabel.layer.cornerRadius = 4
+        badgeLabel.clipsToBounds = true
+        badgeLabel.textAlignment = .center
+        rightStack.addArrangedSubview(badgeLabel)
+
+        let advertiserLabel = factory.createLabel(nativeAd.advertiser, font: .systemFont(ofSize: 12), color: .gray)
+        adView.advertiserView = advertiserLabel
+        rightStack.addArrangedSubview(advertiserLabel)
+
+        headerStack.addArrangedSubview(leftStack)
+        headerStack.addArrangedSubview(rightStack)
+
+        mainStack.addArrangedSubview(headerStack)
+
+        // Media
+        let mediaView = factory.createMediaView(120, adView: adView)
+        mainStack.addArrangedSubview(mediaView)
+
+        // Body
+        if let body = nativeAd.body {
+            let bodyLabel = factory.createLabel(body, font: .systemFont(ofSize: 13), color: .black, lines: 2)
+            adView.bodyView = bodyLabel
+            mainStack.addArrangedSubview(bodyLabel)
+        }
+
+        // CTA
+        let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: .systemBlue)
+        adView.callToActionView = ctaButton
+        mainStack.addArrangedSubview(ctaButton)
     }
 }
+
 
 class NativeAdDesign2 {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
