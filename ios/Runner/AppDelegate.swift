@@ -791,19 +791,6 @@ class NativeAdDesign9 {
         textStack.axis = .vertical
         textStack.spacing = 2
         
-        // Ad Badge (Solid green background)
-        let adBadge = UILabel()
-        adBadge.text = "Ad"
-        adBadge.font = .boldSystemFont(ofSize: 10)
-        adBadge.textColor = .white
-        adBadge.backgroundColor = UIColor(red: 56/255, green: 142/255, blue: 60/255, alpha: 1)
-        adBadge.layer.cornerRadius = 3
-        adBadge.clipsToBounds = true
-        adBadge.textAlignment = .center
-        adBadge.translatesAutoresizingMaskIntoConstraints = false
-        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
         let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: UIColor(red: 1/255, green: 87/255, blue: 155/255, alpha: 1))
         headline.numberOfLines = 1
         adView.headlineView = headline
@@ -817,7 +804,6 @@ class NativeAdDesign9 {
         ratingLabel.textColor = .systemBlue
         ratingLabel.font = .systemFont(ofSize: 10)
         
-        textStack.addArrangedSubview(adBadge)
         textStack.addArrangedSubview(headline)
         textStack.addArrangedSubview(body)
         textStack.addArrangedSubview(ratingLabel)
@@ -1487,19 +1473,6 @@ class NativeAdDesign9Dark {
         textStack.axis = .vertical
         textStack.spacing = 2
         
-        // Ad Badge
-        let adBadge = UILabel()
-        adBadge.text = "Ad"
-        adBadge.font = .boldSystemFont(ofSize: 10)
-        adBadge.textColor = .white
-        adBadge.backgroundColor = UIColor(red: 56/255, green: 142/255, blue: 60/255, alpha: 1)
-        adBadge.layer.cornerRadius = 3
-        adBadge.clipsToBounds = true
-        adBadge.textAlignment = .center
-        adBadge.translatesAutoresizingMaskIntoConstraints = false
-        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
         let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: UIColor(red: 3/255, green: 169/255, blue: 244/255, alpha: 1))
         headline.numberOfLines = 1
         adView.headlineView = headline
@@ -1513,7 +1486,6 @@ class NativeAdDesign9Dark {
         ratingLabel.textColor = .systemBlue
         ratingLabel.font = .systemFont(ofSize: 10)
         
-        textStack.addArrangedSubview(adBadge)
         textStack.addArrangedSubview(headline)
         textStack.addArrangedSubview(body)
         textStack.addArrangedSubview(ratingLabel)
