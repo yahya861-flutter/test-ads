@@ -772,18 +772,12 @@ class NativeAdDesign8 {
 
 class NativeAdDesign9 {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
-        // Root bg #FFFFFF, padding 12dp
         adView.backgroundColor = .white
         
         let mainStack = factory.createMainStack(container, padding: 12)
-        mainStack.axis = .vertical
-        mainStack.spacing = 0
-
-        // Top row: App icon + TextStack + CTA
-        let topRow = UIStackView()
-        topRow.axis = .horizontal
-        topRow.alignment = .center
-        topRow.spacing = 10
+        mainStack.axis = .horizontal
+        mainStack.alignment = .center
+        mainStack.spacing = 10
         
         // App Icon (60dp, circle)
         let iconView = factory.createIconView(nativeAd, adView: adView)
@@ -792,10 +786,23 @@ class NativeAdDesign9 {
         iconView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         iconView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        // TextStack
+        // Text Column
         let textStack = UIStackView()
         textStack.axis = .vertical
         textStack.spacing = 2
+        
+        // Ad Badge (Solid green background)
+        let adBadge = UILabel()
+        adBadge.text = "Ad"
+        adBadge.font = .boldSystemFont(ofSize: 10)
+        adBadge.textColor = .white
+        adBadge.backgroundColor = UIColor(red: 56/255, green: 142/255, blue: 60/255, alpha: 1)
+        adBadge.layer.cornerRadius = 3
+        adBadge.clipsToBounds = true
+        adBadge.textAlignment = .center
+        adBadge.translatesAutoresizingMaskIntoConstraints = false
+        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: UIColor(red: 1/255, green: 87/255, blue: 155/255, alpha: 1))
         headline.numberOfLines = 1
@@ -810,23 +817,27 @@ class NativeAdDesign9 {
         ratingLabel.textColor = .systemBlue
         ratingLabel.font = .systemFont(ofSize: 10)
         
+        textStack.addArrangedSubview(adBadge)
         textStack.addArrangedSubview(headline)
         textStack.addArrangedSubview(body)
         textStack.addArrangedSubview(ratingLabel)
         
+        // Ensure textStack stretches and button hugs
+        textStack.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textStack.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         // CTA Button (#03A9F4)
         let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: UIColor(red: 3/255, green: 169/255, blue: 244/255, alpha: 1))
-        ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 12)
-        ctaButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 11)
         ctaButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        ctaButton.setContentHuggingPriority(.required, for: .horizontal)
+        ctaButton.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        ctaButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
+        ctaButton.widthAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
         adView.callToActionView = ctaButton
         
-        topRow.addArrangedSubview(iconView)
-        topRow.addArrangedSubview(textStack)
-        topRow.addArrangedSubview(ctaButton)
-        
-        mainStack.addArrangedSubview(topRow)
+        mainStack.addArrangedSubview(iconView)
+        mainStack.addArrangedSubview(textStack)
+        mainStack.addArrangedSubview(ctaButton)
     }
 }
 
@@ -1430,33 +1441,70 @@ class NativeAdDesign8Dark {
 
 class NativeAdDesign9Dark {
     static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
-        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        // Root background #121212
+        adView.backgroundColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1)
         
-        let mainStack = factory.createMainStack(container, padding: 12)
-        mainStack.axis = .vertical
-        mainStack.spacing = 0
-        mainStack.backgroundColor = UIColor(white: 0.18, alpha: 1)
+        // Inner Card View (Match XML background #1E1E1E)
+        let cardView = UIView()
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        cardView.backgroundColor = UIColor(red: 30/255, green: 30/255, blue: 30/255, alpha: 1)
+        cardView.layer.cornerRadius = 4
+        cardView.clipsToBounds = true
+        container.addSubview(cardView)
+        
+        // Root padding 12dp from XML
+        NSLayoutConstraint.activate([
+            cardView.topAnchor.constraint(equalTo: container.topAnchor, constant: 12),
+            cardView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 12),
+            cardView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -12),
+            cardView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -12)
+        ])
 
-        let topRow = UIStackView()
-        topRow.axis = .horizontal
-        topRow.alignment = .center
-        topRow.spacing = 10
+        // Content padding 8dp from XML
+        let mainStack = UIStackView()
+        mainStack.axis = .horizontal
+        mainStack.alignment = .center
+        mainStack.spacing = 10
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        cardView.addSubview(mainStack)
         
+        NSLayoutConstraint.activate([
+            mainStack.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 8),
+            mainStack.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 8),
+            mainStack.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -8),
+            mainStack.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -8)
+        ])
+        
+        // App Icon (60dp)
         let iconView = factory.createIconView(nativeAd, adView: adView)
         iconView.layer.cornerRadius = 30
         iconView.clipsToBounds = true
         iconView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         iconView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
+        // Text Column
         let textStack = UIStackView()
         textStack.axis = .vertical
         textStack.spacing = 2
         
-        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .white)
+        // Ad Badge
+        let adBadge = UILabel()
+        adBadge.text = "Ad"
+        adBadge.font = .boldSystemFont(ofSize: 10)
+        adBadge.textColor = .white
+        adBadge.backgroundColor = UIColor(red: 56/255, green: 142/255, blue: 60/255, alpha: 1)
+        adBadge.layer.cornerRadius = 3
+        adBadge.clipsToBounds = true
+        adBadge.textAlignment = .center
+        adBadge.translatesAutoresizingMaskIntoConstraints = false
+        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: UIColor(red: 3/255, green: 169/255, blue: 244/255, alpha: 1))
         headline.numberOfLines = 1
         adView.headlineView = headline
         
-        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 12), color: .lightGray)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 12), color: UIColor(red: 176/255, green: 176/255, blue: 176/255, alpha: 1))
         body.numberOfLines = 2
         adView.bodyView = body
         
@@ -1465,22 +1513,25 @@ class NativeAdDesign9Dark {
         ratingLabel.textColor = .systemBlue
         ratingLabel.font = .systemFont(ofSize: 10)
         
+        textStack.addArrangedSubview(adBadge)
         textStack.addArrangedSubview(headline)
         textStack.addArrangedSubview(body)
         textStack.addArrangedSubview(ratingLabel)
         
+        // Headline #03A9F4, Body #B0B0B0 (match XML)
+        
+        // CTA Button (#03A9F4)
         let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: UIColor(red: 3/255, green: 169/255, blue: 244/255, alpha: 1))
-        ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 12)
-        ctaButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 11)
         ctaButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        ctaButton.setContentHuggingPriority(.required, for: .horizontal)
+        ctaButton.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        ctaButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
+        ctaButton.widthAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
         adView.callToActionView = ctaButton
         
-        topRow.addArrangedSubview(iconView)
-        topRow.addArrangedSubview(textStack)
-        topRow.addArrangedSubview(ctaButton)
-        
-        mainStack.addArrangedSubview(topRow)
+        mainStack.addArrangedSubview(iconView)
+        mainStack.addArrangedSubview(textStack)
+        mainStack.addArrangedSubview(ctaButton)
     }
 }
 
