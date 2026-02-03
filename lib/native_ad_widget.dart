@@ -6,12 +6,14 @@ class NativeAdWidget extends StatefulWidget {
   final int styleIndex;
   final TemplateType templateType;
   final Alignment infoPlacement;
+  final bool isDark;
 
   const NativeAdWidget({
     super.key,
     this.styleIndex = 0,
     this.templateType = TemplateType.small,
     this.infoPlacement = Alignment.topRight,
+    this.isDark = false,
   });
 
   @override
@@ -48,7 +50,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         },
       ),
       request: const AdRequest(),
-      factoryId: 'native_ad_factory_${widget.styleIndex + 1}',
+      factoryId: 'native_ad_factory_${widget.styleIndex + 1}${widget.isDark ? '_dark' : ''}',
     )..load();
   }
 
@@ -106,7 +108,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         break;
       case 5: // Design 6: Icon Right (No Media)
         minHeight = 100;
-        maxHeight = 130;
+        maxHeight = 140;
         break;
       case 6: // Design 7: Purple
         minHeight = 150;
@@ -117,8 +119,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 380;
         break;
       case 8: // Design 9: Modern
-        minHeight = 100;
-        maxHeight = 100;
+        minHeight = 80;
+        maxHeight = 120;
         break;
       case 9: // Design 10: Full Media
         minHeight = 100;
@@ -132,7 +134,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: widget.isDark ? const Color(0xFF121212) : Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(

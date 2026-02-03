@@ -8,10 +8,21 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        // Register 10 native ad factories
+        // Register 10 native ad factories (Light)
         for (i in 1..10) {
             val factoryId = "native_ad_factory_$i"
             val layoutId = resources.getIdentifier("native_ad_$i", "layout", packageName)
+            if (layoutId != 0) {
+                GoogleMobileAdsPlugin.registerNativeAdFactory(
+                    flutterEngine, factoryId, MyNativeAdFactory(layoutInflater, layoutId)
+                )
+            }
+        }
+
+        // Register 10 native ad factories (Dark)
+        for (i in 1..10) {
+            val factoryId = "native_ad_factory_${i}_dark"
+            val layoutId = resources.getIdentifier("native_ad_${i}_dark", "layout", packageName)
             if (layoutId != 0) {
                 GoogleMobileAdsPlugin.registerNativeAdFactory(
                     flutterEngine, factoryId, MyNativeAdFactory(layoutInflater, layoutId)
@@ -24,6 +35,7 @@ class MainActivity : FlutterActivity() {
         super.cleanUpFlutterEngine(flutterEngine)
         for (i in 1..10) {
             GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "native_ad_factory_$i")
+            GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "native_ad_factory_${i}_dark")
         }
     }
 }

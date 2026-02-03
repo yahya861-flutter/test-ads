@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false, home: NativeDesignsScreen());
+    return const MaterialApp(debugShowCheckedModeBanner: false, home: home());
   }
 }
 
@@ -84,6 +84,24 @@ class _homeState extends State<home> {
                 );
               },
               child: const Text("View 10 Native Designs"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const NativeDesignsScreen(isDark: true)),
+                );
+              },
+              child: const Text("View 10 Dark Native Designs"),
             ),
             const SizedBox(height: 10),
 
