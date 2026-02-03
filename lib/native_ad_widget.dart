@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NativeAdWidget extends StatefulWidget {
   final int styleIndex;
@@ -60,75 +61,59 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     super.dispose();
   }
 
-  void _showAdInfo(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Why you see this ad"),
-        content: const Text(
-          "This ad is shown based on test configurations. In a real app, ads are personalized by Google based on your interests and activity.",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (!_nativeAdIsLoaded || _nativeAd == null) return const SizedBox.shrink();
-
     double minHeight;
     double maxHeight;
 
     switch (widget.styleIndex) {
-      case 0: // Design 1: Classic
+      case 0:
         minHeight = 80;
         maxHeight = 270;
         break;
-      case 1: // Design 2: Dark
+      case 1:
         minHeight = 150;
         maxHeight = 330;
         break;
-      case 2: // Design 3: High Headline
+      case 2:
         minHeight = 250;
         maxHeight = 350;
         break;
-      case 3: // Design 4: Media Focused
+      case 3:
         minHeight = 100;
         maxHeight = 200;
         break;
-      case 4: // Design 5: Compact List (No Media)
+      case 4:
         minHeight = 80;
         maxHeight = 80;
         break;
-      case 5: // Design 6: Icon Right (No Media)
+      case 5:
         minHeight = 100;
         maxHeight = 140;
         break;
-      case 6: // Design 7: Purple
+      case 6:
         minHeight = 150;
         maxHeight = 300;
         break;
-      case 7: // Design 8: Luxury
+      case 7:
         minHeight = 200;
         maxHeight = 380;
         break;
-      case 8: // Design 9: Modern
+      case 8:
         minHeight = 80;
         maxHeight = 120;
         break;
-      case 9: // Design 10: Full Media
+      case 9:
         minHeight = 100;
         maxHeight = 350;
         break;
       default:
         minHeight = 150;
         maxHeight = 350;
+    }
+
+    if (!_nativeAdIsLoaded || _nativeAd == null) {
+      return _buildShimmerPlaceholder(maxHeight);
     }
 
     return Container(
@@ -144,19 +129,87 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           ),
         ],
       ),
-      child: Stack(
-        children: [
-          // The Ad
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: 320,
-              minHeight: minHeight,
-              maxWidth: 400,
-              maxHeight: maxHeight,
-            ),
-            child: AdWidget(ad: _nativeAd!),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: 320,
+          minHeight: minHeight,
+          maxWidth: 400,
+          maxHeight: maxHeight,
+        ),
+        child: AdWidget(ad: _nativeAd!),
+      ),
+    );
+  }
+
+  Widget _buildShimmerPlaceholder(double maxHeight) {
+    final baseColor = widget.isDark ? Colors.grey[900]! : Colors.grey[300]!;
+    final highlightColor = widget.isDark ? Colors.grey[800]! : Colors.grey[100]!;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+      height: maxHeight,
+      decoration: BoxDecoration(
+        color: widget.isDark ? const Color(0xFF121212) : Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Shimmer.fromColors(
+        baseColor: baseColor,
+        highlightColor: highlightColor,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 14,
+                          color: baseColor,
+                        ),
+                        const SizedBox(height: 6),
+                        Container(
+                          width: 100,
+                          height: 10,
+                          color: baseColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  color: baseColor,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: baseColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
