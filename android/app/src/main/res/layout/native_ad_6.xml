@@ -42,16 +42,15 @@
             android:id="@+id/ad_app_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_below="@id/text_container"
-            android:layout_marginTop="12dp"
-            android:background="#3F51B5"
+            android:layout_marginTop="20dp"
+            android:background="#1E9BE9"
             android:textColor="#FFFFFF" />
     </RelativeLayout>
 </com.google.android.gms.ads.nativead.NativeAdView>

@@ -106,7 +106,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         break;
       case 5: // Design 6: Icon Right (No Media)
         minHeight = 100;
-        maxHeight = 120;
+        maxHeight = 130;
         break;
       case 6: // Design 7: Purple
         minHeight = 150;
