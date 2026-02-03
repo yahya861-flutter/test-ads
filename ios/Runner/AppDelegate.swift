@@ -835,6 +835,7 @@ class NativeAdDesign10 {
         let mainStack = factory.createMainStack(container, padding: 0)
         mainStack.axis = .vertical
         mainStack.spacing = 0
+        mainStack.backgroundColor = .white
 
         // Media (180dp)
         let media = factory.createMediaView(180, adView: adView)
@@ -908,6 +909,7 @@ class NativeAdDesign10 {
         contentStack.addArrangedSubview(body)
         contentStack.addArrangedSubview(bottomRow)
         
+        mainStack.addArrangedSubview(contentStack)
     }
 }
 
