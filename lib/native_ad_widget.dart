@@ -90,7 +90,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         break;
       case 1: // Design 2: Dark
         minHeight = 150;
-        maxHeight = 280;
+        maxHeight = 330;
         break;
       case 2: // Design 3: High Headline
         minHeight = 250;
@@ -98,7 +98,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         break;
       case 3: // Design 4: Media Focused
         minHeight = 100;
-        maxHeight = 180;
+        maxHeight = 200;
         break;
       case 4: // Design 5: Compact List (No Media)
         minHeight = 80;
@@ -130,7 +130,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     }
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
