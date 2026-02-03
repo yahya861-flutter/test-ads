@@ -828,106 +828,75 @@ class NativeAdDesign9 {
 }
 
 final class NativeAdDesign10 {
-
-    static func setup(
-        _ container: UIView,
-        _ adView: NativeAdView,
-        nativeAd: NativeAd,
-        factory: MyNativeAdFactory
-    ) {
-
-        // Root background (card)
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        // Root bg white for card effect
         adView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-
-        // Main horizontal stack
+        
         let mainStack = factory.createMainStack(container, padding: 0)
         mainStack.axis = .horizontal
         mainStack.spacing = 0
-        mainStack.alignment = .center
         mainStack.backgroundColor = .white
-        mainStack.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        mainStack.alignment = .center
+        mainStack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         mainStack.isLayoutMarginsRelativeArrangement = true
 
-        // Media (Left)
-        let mediaView = factory.createMediaView(140, adView: adView)
-        mediaView.translatesAutoresizingMaskIntoConstraints = false
-        mediaView.heightAnchor.constraint(equalToConstant: 140).isActive = true
-        adView.mediaView = mediaView
+        // Left Section: Text Content (Weight 1)
+        let textStack = UIStackView()
+        textStack.axis = .vertical
+        textStack.spacing = 4
+        textStack.alignment = .fill
 
-        // Info stack (Right)
-        let infoStack = UIStackView()
-        infoStack.axis = .vertical
-        infoStack.spacing = 4
-        infoStack.alignment = .center
-        infoStack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
-        infoStack.isLayoutMarginsRelativeArrangement = true
-
-        // App Icon
-        let iconView = factory.createIconView(nativeAd, adView: adView)
-        iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        iconView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
-        // Headline
-        let headline = factory.createLabel(
-            nativeAd.headline,
-            font: .boldSystemFont(ofSize: 14),
-            color: UIColor(white: 0.13, alpha: 1)
-        )
-        headline.numberOfLines = 1
-        headline.textAlignment = .center
+        // Headline (Bold 16pt)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: UIColor(white: 0.13, alpha: 1))
+        headline.numberOfLines = 2
         adView.headlineView = headline
-
-        // Body
-        let body = factory.createLabel(
-            nativeAd.body,
-            font: .systemFont(ofSize: 11),
-            color: UIColor(white: 0.46, alpha: 1)
-        )
+        
+        // Body (12pt)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 12), color: UIColor(white: 0.38, alpha: 1)) // #616161
         body.numberOfLines = 2
-        body.textAlignment = .center
         adView.bodyView = body
-
-        // Bottom row (AD badge + CTA)
-        let bottomRow = UIStackView()
-        bottomRow.axis = .horizontal
-        bottomRow.alignment = .center
-        bottomRow.spacing = 8
-
-        let adBadge = UILabel()
-        adBadge.text = "AD"
-        adBadge.font = .boldSystemFont(ofSize: 10)
-        adBadge.textColor = .white
-        adBadge.backgroundColor = UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1)
-        adBadge.textAlignment = .center
-        adBadge.layer.cornerRadius = 2
-        adBadge.clipsToBounds = true
-        adBadge.translatesAutoresizingMaskIntoConstraints = false
-        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
-
-        let ctaButton = factory.createButton(
-            nativeAd.callToAction,
-            bgColor: UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1)
-        )
+        
+        // CTA Button (Red #D32F2F, 36pt height)
+        let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1))
         ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 12)
-        ctaButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        ctaButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         adView.callToActionView = ctaButton
+        
+        // Wrap CTA in a container to manage margin-top
+        let ctaWrapper = UIView()
+        ctaWrapper.addSubview(ctaButton)
+        ctaButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ctaButton.topAnchor.constraint(equalTo: ctaWrapper.topAnchor, constant: 6),
+            ctaButton.leadingAnchor.constraint(equalTo: ctaWrapper.leadingAnchor),
+            ctaButton.trailingAnchor.constraint(equalTo: ctaWrapper.trailingAnchor),
+            ctaButton.bottomAnchor.constraint(equalTo: ctaWrapper.bottomAnchor)
+        ])
 
-        // Assemble
-        bottomRow.addArrangedSubview(adBadge)
-        bottomRow.addArrangedSubview(ctaButton)
+        textStack.addArrangedSubview(headline)
+        textStack.addArrangedSubview(body)
+        textStack.addArrangedSubview(ctaWrapper)
+        
+        // Right Section: Media (140x120)
+        let media = factory.createMediaView(120, adView: adView)
+        media.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            media.widthAnchor.constraint(equalToConstant: 140),
+            media.heightAnchor.constraint(equalToConstant: 120)
+        ])
+        adView.mediaView = media
+        
+        let mediaContainer = UIView()
+        mediaContainer.addSubview(media)
+        NSLayoutConstraint.activate([
+            media.topAnchor.constraint(equalTo: mediaContainer.topAnchor),
+            media.trailingAnchor.constraint(equalTo: mediaContainer.trailingAnchor),
+            media.bottomAnchor.constraint(equalTo: mediaContainer.bottomAnchor),
+            media.leadingAnchor.constraint(equalTo: mediaContainer.leadingAnchor, constant: 10) // marginStart 10dp
+        ])
 
-        infoStack.addArrangedSubview(iconView)
-        infoStack.addArrangedSubview(headline)
-        infoStack.addArrangedSubview(body)
-        infoStack.addArrangedSubview(bottomRow)
-
-        mainStack.addArrangedSubview(mediaView)
-        mainStack.addArrangedSubview(infoStack)
-
-        // Width ratio (Media 1.3x Info)
-        mediaView.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1.3).isActive = true
+        mainStack.addArrangedSubview(textStack)
+        mainStack.addArrangedSubview(mediaContainer)
     }
 }
 
@@ -1529,97 +1498,73 @@ class NativeAdDesign9Dark {
 }
 
 final class NativeAdDesign10Dark {
-
-    static func setup(
-        _ container: UIView,
-        _ adView: NativeAdView,
-        nativeAd: NativeAd,
-        factory: MyNativeAdFactory
-    ) {
-
-        adView.backgroundColor = UIColor(white: 0.10, alpha: 1)
-
+    static func setup(_ container: UIView, _ adView: NativeAdView, nativeAd: NativeAd, factory: MyNativeAdFactory) {
+        // Root bg dark
+        adView.backgroundColor = UIColor(white: 0.1, alpha: 1)
+        
         let mainStack = factory.createMainStack(container, padding: 0)
         mainStack.axis = .horizontal
         mainStack.spacing = 0
-        mainStack.alignment = .center
         mainStack.backgroundColor = UIColor(white: 0.14, alpha: 1)
-        mainStack.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        mainStack.alignment = .center
+        mainStack.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         mainStack.isLayoutMarginsRelativeArrangement = true
 
-        // Media
-        let mediaView = factory.createMediaView(140, adView: adView)
-        mediaView.translatesAutoresizingMaskIntoConstraints = false
-        mediaView.heightAnchor.constraint(equalToConstant: 140).isActive = true
-        adView.mediaView = mediaView
+        // Left Section: Text Content
+        let textStack = UIStackView()
+        textStack.axis = .vertical
+        textStack.spacing = 4
+        textStack.alignment = .fill
 
-        // Info stack
-        let infoStack = UIStackView()
-        infoStack.axis = .vertical
-        infoStack.spacing = 4
-        infoStack.alignment = .center
-        infoStack.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
-        infoStack.isLayoutMarginsRelativeArrangement = true
-
-        let iconView = factory.createIconView(nativeAd, adView: adView)
-        iconView.translatesAutoresizingMaskIntoConstraints = false
-        iconView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        iconView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
-        let headline = factory.createLabel(
-            nativeAd.headline,
-            font: .boldSystemFont(ofSize: 14),
-            color: .white
-        )
-        headline.numberOfLines = 1
-        headline.textAlignment = .center
+        // Headline (White, Bold 16pt)
+        let headline = factory.createLabel(nativeAd.headline, font: .boldSystemFont(ofSize: 16), color: .white)
+        headline.numberOfLines = 2
         adView.headlineView = headline
-
-        let body = factory.createLabel(
-            nativeAd.body,
-            font: .systemFont(ofSize: 11),
-            color: .lightGray
-        )
+        
+        // Body (Light Gray, 12pt)
+        let body = factory.createLabel(nativeAd.body, font: .systemFont(ofSize: 12), color: UIColor(white: 0.7, alpha: 1)) // #B0B0B0
         body.numberOfLines = 2
-        body.textAlignment = .center
         adView.bodyView = body
-
-        let bottomRow = UIStackView()
-        bottomRow.axis = .horizontal
-        bottomRow.alignment = .center
-        bottomRow.spacing = 8
-
-        let adBadge = UILabel()
-        adBadge.text = "AD"
-        adBadge.font = .boldSystemFont(ofSize: 10)
-        adBadge.textColor = .white
-        adBadge.backgroundColor = UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1)
-        adBadge.textAlignment = .center
-        adBadge.layer.cornerRadius = 2
-        adBadge.clipsToBounds = true
-        adBadge.translatesAutoresizingMaskIntoConstraints = false
-        adBadge.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        adBadge.heightAnchor.constraint(equalToConstant: 16).isActive = true
-
-        let ctaButton = factory.createButton(
-            nativeAd.callToAction,
-            bgColor: UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1)
-        )
+        
+        // CTA Button (Red #D32F2F, 36pt height)
+        let ctaButton = factory.createButton(nativeAd.callToAction, bgColor: UIColor(red: 211/255, green: 47/255, blue: 47/255, alpha: 1))
         ctaButton.titleLabel?.font = .boldSystemFont(ofSize: 12)
-        ctaButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        ctaButton.heightAnchor.constraint(equalToConstant: 36).isActive = true
         adView.callToActionView = ctaButton
+        
+        let ctaWrapper = UIView()
+        ctaWrapper.addSubview(ctaButton)
+        ctaButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ctaButton.topAnchor.constraint(equalTo: ctaWrapper.topAnchor, constant: 6),
+            ctaButton.leadingAnchor.constraint(equalTo: ctaWrapper.leadingAnchor),
+            ctaButton.trailingAnchor.constraint(equalTo: ctaWrapper.trailingAnchor),
+            ctaButton.bottomAnchor.constraint(equalTo: ctaWrapper.bottomAnchor)
+        ])
 
-        bottomRow.addArrangedSubview(adBadge)
-        bottomRow.addArrangedSubview(ctaButton)
+        textStack.addArrangedSubview(headline)
+        textStack.addArrangedSubview(body)
+        textStack.addArrangedSubview(ctaWrapper)
+        
+        // Right Section: Media (140x120)
+        let media = factory.createMediaView(120, adView: adView)
+        media.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            media.widthAnchor.constraint(equalToConstant: 140),
+            media.heightAnchor.constraint(equalToConstant: 120)
+        ])
+        adView.mediaView = media
+        
+        let mediaContainer = UIView()
+        mediaContainer.addSubview(media)
+        NSLayoutConstraint.activate([
+            media.topAnchor.constraint(equalTo: mediaContainer.topAnchor),
+            media.trailingAnchor.constraint(equalTo: mediaContainer.trailingAnchor),
+            media.bottomAnchor.constraint(equalTo: mediaContainer.bottomAnchor),
+            media.leadingAnchor.constraint(equalTo: mediaContainer.leadingAnchor, constant: 10)
+        ])
 
-        infoStack.addArrangedSubview(iconView)
-        infoStack.addArrangedSubview(headline)
-        infoStack.addArrangedSubview(body)
-        infoStack.addArrangedSubview(bottomRow)
-
-        mainStack.addArrangedSubview(mediaView)
-        mainStack.addArrangedSubview(infoStack)
-
-        mediaView.widthAnchor.constraint(equalTo: infoStack.widthAnchor, multiplier: 1.3).isActive = true
+        mainStack.addArrangedSubview(textStack)
+        mainStack.addArrangedSubview(mediaContainer)
     }
 }
