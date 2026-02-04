@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#111827"
+        android:background="@drawable/ad_bg_bottom_rounded_dark"
         android:padding="0dp">
 
         <!-- Section 1: Top-Left Badge -->

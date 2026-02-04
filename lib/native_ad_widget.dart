@@ -96,8 +96,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 360;
         break;
       case 7:
-        minHeight = 360;
-        maxHeight = 400;
+        minHeight = 350;
+        maxHeight = 370;
         break;
       case 8:
         minHeight = 80;
@@ -435,67 +435,91 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
 
     if (widget.styleIndex == 7) {
       return [
-        // Section 1: Top-Left Badge
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            width: 30,
-            height: 16,
-            decoration: BoxDecoration(
-              color: baseColor,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        // Section 2: Square Icon + Text Pillar
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Square Icon
-            Container(
-              width: 55,
-              height: 55,
-              color: baseColor,
-            ),
-            const SizedBox(width: 12),
-            // Text Pillar
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(height: 18, color: baseColor),
-                  const SizedBox(height: 8),
-                  Container(height: 14, color: baseColor),
-                  const SizedBox(height: 4),
-                  Container(width: 150, height: 14, color: baseColor),
-                ],
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 16),
-        // Section 3: Media View Skeleton
         Container(
           width: double.infinity,
-          height: 180,
           decoration: BoxDecoration(
-            color: baseColor,
-            borderRadius: BorderRadius.circular(16),
+            color: Colors.transparent,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+            border: Border.all(color: baseColor.withOpacity(0.1)),
           ),
-        ),
-        const SizedBox(height: 16),
-        // Section 4: CTA Button
-        Container(
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color: baseColor,
-            borderRadius: BorderRadius.circular(25),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Section 1: Top-Left Badge
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: 30,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(8),
+                        bottomRight: Radius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Section 2: Square Icon + Text Pillar
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Square Icon
+                    Container(
+                      width: 55,
+                      height: 55,
+                      color: baseColor,
+                    ),
+                    const SizedBox(width: 12),
+                    // Text Pillar
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(height: 18, color: baseColor),
+                          const SizedBox(height: 8),
+                          Container(height: 14, color: baseColor),
+                          const SizedBox(height: 4),
+                          Container(width: 150, height: 14, color: baseColor),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                // Section 3: Media View Skeleton
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    height: 180,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Section 4: CTA Button
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 40),
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ];
