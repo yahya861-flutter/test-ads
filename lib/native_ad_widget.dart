@@ -151,8 +151,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     final baseColor = widget.isDark ? Colors.grey[900]! : Colors.grey[300]!;
     final highlightColor = widget.isDark ? Colors.grey[800]! : Colors.grey[100]!;
     
-    // Style 0 (Design 1) and Style 8 (Design 9) use 0dp root padding in XML
-    final padding = (widget.styleIndex == 4 || widget.styleIndex == 0 || widget.styleIndex == 8) ? 0.0 : 12.0;
+    // Styles 0, 7, and 8 use 0dp root padding in XML to allow components to touch edges
+    final padding = (widget.styleIndex == 4 || 
+                     widget.styleIndex == 0 || 
+                     widget.styleIndex == 7 || 
+                     widget.styleIndex == 8) ? 0.0 : 12.0;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
@@ -172,7 +175,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           padding: EdgeInsets.all(padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: (widget.styleIndex == 0 || widget.styleIndex == 8) 
+            mainAxisAlignment: (widget.styleIndex == 0 || 
+                                widget.styleIndex == 7 || 
+                                widget.styleIndex == 8) 
                 ? MainAxisAlignment.start 
                 : MainAxisAlignment.center,
             children: _buildShimmerContent(baseColor),
