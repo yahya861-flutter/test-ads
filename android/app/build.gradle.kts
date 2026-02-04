@@ -38,6 +38,9 @@ android {
         }
     }
 }
+dependencies {
+    implementation("androidx.cardview:cardview:1.0.0")
+}
 
 flutter {
     source = "../.."

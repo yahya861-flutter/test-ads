@@ -71,6 +71,10 @@ class MyNativeAdFactory(private val layoutInflater: LayoutInflater, private val 
         // Media
         adView.mediaView = adView.findViewById(R.id.ad_media) as? MediaView
 
+        adView.mediaView?.let { mediaView ->
+            mediaView.setImageScaleType(ImageView.ScaleType.CENTER_INSIDE)
+        }
+
         adView.setNativeAd(nativeAd)
 
         return adView
