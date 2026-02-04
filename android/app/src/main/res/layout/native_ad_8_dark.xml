@@ -37,8 +37,9 @@
 
             <ImageView
                 android:id="@+id/ad_app_icon"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="15dp"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -65,8 +66,11 @@
                     android:layout_marginTop="2dp"
                     android:textColor="#D1D5DB"
                     android:textSize="14sp"
-                    android:maxLines="2"
-                    android:ellipsize="end" />
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true" />
             </LinearLayout>
         </LinearLayout>
 

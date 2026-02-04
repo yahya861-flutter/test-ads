@@ -452,8 +452,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  width: 30,
-                  height: 16,
+                  width: 32,
+                  height: 24,
                   decoration: BoxDecoration(
                     color: baseColor,
                     borderRadius: const BorderRadius.only(
@@ -468,10 +468,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(width: 15),
                   // Square Icon
                   Container(
-                    width: 55,
-                    height: 55,
+                    width: 60,
+                    height: 60,
                     color: baseColor,
                   ),
                   const SizedBox(width: 12),
