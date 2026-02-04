@@ -87,7 +87,7 @@
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/cta_orange_pill"
             android:textAllCaps="true"
             android:textColor="#FFFFFF"

@@ -88,8 +88,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 85;
         break;
       case 5:
-        minHeight = 170;
-        maxHeight = 190;
+        minHeight = 150;
+        maxHeight = 160;
         break;
       case 6:
         minHeight = 150;
@@ -332,9 +332,21 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: Container(
-                          height: 14,
-                          color: baseColor,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 12,
+                              color: baseColor,
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              width: 150,
+                              height: 12,
+                              color: baseColor,
+                            ),
+                          ],
                         ),
                       ),
                     ],
