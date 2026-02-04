@@ -84,8 +84,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 380;
         break;
       case 4:
-        minHeight = 90;
-        maxHeight = 90;
+        minHeight = 85;
+        maxHeight = 85;
         break;
       case 5:
         minHeight = 100;
@@ -144,6 +144,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
   Widget _buildShimmerPlaceholder(double maxHeight) {
     final baseColor = widget.isDark ? Colors.grey[900]! : Colors.grey[300]!;
     final highlightColor = widget.isDark ? Colors.grey[800]! : Colors.grey[100]!;
+    
+    // Style 4 is very short (85dp), so we use less padding to prevent overflow
+    final padding = (widget.styleIndex == 4) ? 0.0 : 12.0;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
@@ -156,9 +159,10 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         baseColor: baseColor,
         highlightColor: highlightColor,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: _buildShimmerContent(baseColor),
           ),
         ),
@@ -231,38 +235,54 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
             Container(
               width: 60,
               height: 60,
-              margin: const EdgeInsets.only(left: 8),
+              margin: const EdgeInsets.only(left: 12),
               decoration: BoxDecoration(
                 color: baseColor,
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
             const SizedBox(width: 12),
-            // Text middle
+            // Middle section
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    width: 150,
-                    height: 16,
-                    color: baseColor,
+                  // Badge + Headline
+                  Row(
+                    children: [
+                      Container(
+                        width: 25,
+                        height: 14,
+                        decoration: BoxDecoration(
+                          color: baseColor,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Container(
+                          height: 16,
+                          color: baseColor,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
+                  // Body
                   Container(
                     width: double.infinity,
                     height: 12,
                     color: baseColor,
+                    margin: const EdgeInsets.only(right: 12),
                   ),
                 ],
               ),
             ),
-            const SizedBox(width: 12),
             // Vertical CTA
             Container(
               width: 100,
-              height: 90,
+              height: 85,
               color: baseColor,
             ),
           ],
