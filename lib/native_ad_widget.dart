@@ -72,8 +72,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 270;
         break;
       case 1: // Design 2
-        minHeight = 140;
-        maxHeight = 160;
+        minHeight = 145; // Adjusted for dividers flow
+        maxHeight = 165;
         break;
       case 2: // Design 3
         minHeight = 80;
@@ -122,12 +122,19 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         color: widget.isDark 
             ? (widget.styleIndex == 8 ? const Color(0xFF111827) : 
                widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
+               widget.styleIndex == 0 ? const Color(0xFF000000) :
                const Color(0xFF121212)) 
-            : Colors.white,
-        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
+            : (widget.styleIndex == 0 ? const Color(0xFFEDEFF2) : Colors.white),
+        borderRadius: (widget.styleIndex == 0 || 
+                       widget.styleIndex == 1 || 
+                       widget.styleIndex == 4 || 
+                       widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
-        boxShadow: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
+        boxShadow: (widget.styleIndex == 0 || 
+                    widget.styleIndex == 1 || 
+                    widget.styleIndex == 4 || 
+                    widget.styleIndex == 8)
             ? [] // No shadow for squared/flat designs to match XML background
             : [
                 BoxShadow(
@@ -168,8 +175,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         color: widget.isDark 
             ? (widget.styleIndex == 8 ? const Color(0xFF111827) : 
                widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
+               widget.styleIndex == 0 ? const Color(0xFF000000) :
                const Color(0xFF121212)) 
-            : Colors.white,
+            : (widget.styleIndex == 0 ? const Color(0xFFEDEFF2) : Colors.white),
         borderRadius: (widget.styleIndex == 0 || 
                        widget.styleIndex == 1 || 
                        widget.styleIndex == 2 || 
@@ -203,66 +211,79 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
   List<Widget> _buildShimmerContent(Color baseColor) {
     if (widget.styleIndex == 0) {
       return [
-        // Header Section
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: baseColor,
-                shape: BoxShape.circle,
-              ),
-            ),
-            const SizedBox(width: 10),
-            Container(
-              width: 120,
-              height: 18,
-              color: baseColor,
-            ),
-            const Spacer(),
-            Container(
-              width: 25,
-              height: 14,
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(width: 6),
-            Container(
-              width: 60,
-              height: 14,
-              color: baseColor,
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        // Media Section
         Container(
-          width: double.infinity,
-          height: 120,
-          color: baseColor,
-        ),
-        const SizedBox(height: 12),
-        // CTA Button
-        Container(
-          width: double.infinity,
-          height: 48,
-          decoration: BoxDecoration(
-            color: baseColor,
-            borderRadius: BorderRadius.circular(4),
+          margin: widget.isDark ? const EdgeInsets.all(8) : EdgeInsets.zero,
+          padding: const EdgeInsets.all(12),
+          decoration: widget.isDark ? BoxDecoration(
+            color: const Color(0xFF1E1E1E), // Match dark_card_bg color roughly
+            borderRadius: BorderRadius.circular(8),
+          ) : null,
+          child: Column(
+            children: [
+              // Header Section
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    width: 120,
+                    height: 18,
+                    color: baseColor,
+                  ),
+                  const Spacer(),
+                  Container(
+                    width: 25,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    width: 60,
+                    height: 14,
+                    color: baseColor,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              // Media Section
+              Container(
+                width: double.infinity,
+                height: 120,
+                color: baseColor,
+              ),
+              const SizedBox(height: 12),
+              // CTA Button
+              Container(
+                width: double.infinity,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: widget.isDark ? baseColor : const Color(0xFFE91E63),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ],
           ),
         ),
       ];
     }
 
     if (widget.styleIndex == 1) {
+      final dividerColor = widget.isDark ? const Color(0xFF444444) : Colors.black;
       return [
         // Top Divider
-        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
-        const SizedBox(height: 10),
+        Container(width: double.infinity, height: 1, color: dividerColor),
+        const SizedBox(height: 4), // Small gap before content as per orientation="vertical"
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -305,65 +326,75 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 4), // Small gap after content
         // Bottom Divider
-        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
+        Container(width: double.infinity, height: 1, color: dividerColor),
       ];
     }
 
     if (widget.styleIndex == 2) {
       return [
         // Top Divider
-        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
-        const SizedBox(height: 4),
-        // Ad Badge (inside RelativeLayout in XML, but here at top of content is fine)
-        Container(
-          width: 32,
-          height: 16,
-          decoration: BoxDecoration(
-            color: baseColor,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        Container(width: double.infinity, height: 1, color: baseColor),
+        Stack(
           children: [
-            // Icon Pill
-            Container(
-              width: 50,
-              height: 50,
-              margin: const EdgeInsets.only(left: 15, right: 10, top: 3),
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            // Middle Content
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(height: 16, color: baseColor),
-                  const SizedBox(height: 4),
-                  Container(width: 100, height: 12, color: baseColor),
+                  // Icon Pill
+                  Container(
+                    width: 50,
+                    height: 50,
+                    margin: const EdgeInsets.only(left: 15, right: 10, top: 3),
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  // Middle Content
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 12),
+                        Container(height: 16, color: baseColor),
+                        const SizedBox(height: 4),
+                        Container(width: 100, height: 12, color: baseColor),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  // CTA Button Pill
+                  Container(
+                    width: 80,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: baseColor,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(width: 10),
-            // CTA Button Pill
-            Container(
-              width: 80,
-              height: 48,
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(24),
+            // Ad Badge - Positioned to overlap
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                width: 32,
+                height: 16,
+                decoration: BoxDecoration(
+                  color: baseColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 8),
         // Bottom Divider
-        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
+        Container(width: double.infinity, height: 1, color: baseColor),
       ];
     }
 
