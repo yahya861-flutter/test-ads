@@ -292,10 +292,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
 
     if (widget.styleIndex == 5) {
       return [
-        // Row 1: Icon + Headline
+        // Top Row: Icon + (Headline, Badge & Body)
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Icon
             Container(
               width: 45,
               height: 45,
@@ -305,43 +306,52 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               ),
             ),
             const SizedBox(width: 12),
+            // Text Column
             Expanded(
-              child: Container(
-                height: 18,
-                color: baseColor,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        // Row 2: Badge + Body
-        Row(
-          children: [
-            Container(
-              width: 30,
-              height: 16,
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Container(
-                height: 14,
-                color: baseColor,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Headline
+                  Container(
+                    width: double.infinity,
+                    height: 18,
+                    color: baseColor,
+                  ),
+                  const SizedBox(height: 8),
+                  // Badge + Body
+                  Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: baseColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Container(
+                          height: 14,
+                          color: baseColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        // Row 3: CTA Button
+        // CTA Button
         Container(
           width: double.infinity,
-          height: 56,
+          height: 50,
           decoration: BoxDecoration(
             color: baseColor,
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(25),
           ),
         ),
       ];
