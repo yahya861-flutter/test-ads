@@ -119,7 +119,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       decoration: BoxDecoration(
-        color: widget.isDark ? const Color(0xFF121212) : Colors.white,
+        color: widget.isDark 
+            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : const Color(0xFF121212)) 
+            : Colors.white,
         borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
@@ -149,15 +151,19 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     final baseColor = widget.isDark ? Colors.grey[900]! : Colors.grey[300]!;
     final highlightColor = widget.isDark ? Colors.grey[800]! : Colors.grey[100]!;
     
-    // Style 4 is very short (85dp), so we use less padding to prevent overflow
-    final padding = (widget.styleIndex == 4) ? 0.0 : 12.0;
+    // Style 0 (Design 1) and Style 8 (Design 9) use 0dp root padding in XML
+    final padding = (widget.styleIndex == 4 || widget.styleIndex == 0 || widget.styleIndex == 8) ? 0.0 : 12.0;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       height: maxHeight,
       decoration: BoxDecoration(
-        color: widget.isDark ? const Color(0xFF121212) : Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: widget.isDark 
+            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : const Color(0xFF121212)) 
+            : Colors.white,
+        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 8)
+            ? BorderRadius.zero 
+            : BorderRadius.circular(10),
       ),
       child: Shimmer.fromColors(
         baseColor: baseColor,
@@ -166,7 +172,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           padding: EdgeInsets.all(padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: (widget.styleIndex == 0 || widget.styleIndex == 8) 
+                ? MainAxisAlignment.start 
+                : MainAxisAlignment.center,
             children: _buildShimmerContent(baseColor),
           ),
         ),
@@ -694,27 +702,17 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
       return [
         Container(
           width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.zero,
-            border: Border.all(color: baseColor.withOpacity(0.1)),
-          ),
+          color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top Row: AD Badge
-              Padding(
-                padding: const EdgeInsets.only(left: 12, top: 8),
-                child: Container(
-                  width: 30,
-                  height: 16,
-                  decoration: BoxDecoration(
-                    color: baseColor,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
+              // Section 1: Top-Left Badge
+              Container(
+                width: 32,
+                height: 20,
+                color: baseColor,
               ),
-              // Header Row: Icon + Texts
+              // Section 2: Header Row: Icon + Texts
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
@@ -738,7 +736,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                   ],
                 ),
               ),
-              // Media View
+              // Section 3: Media View
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Container(
@@ -747,12 +745,12 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                   color: baseColor,
                 ),
               ),
-              // CTA Button
+              // Section 4: CTA Button
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 12),
                 child: Container(
                   width: double.infinity,
-                  height: 54,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: baseColor,
                     borderRadius: BorderRadius.circular(8),
