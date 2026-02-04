@@ -486,7 +486,10 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                         const SizedBox(height: 8),
                         Container(height: 14, color: baseColor),
                         const SizedBox(height: 4),
-                        Container(width: 200, height: 14, color: baseColor),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Container(width: double.infinity, height: 14, color: baseColor),
+                        ),
                       ],
                     ),
                   ),
