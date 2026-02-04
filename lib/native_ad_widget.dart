@@ -92,8 +92,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 160;
         break;
       case 6:
-        minHeight = 150;
-        maxHeight = 300;
+        minHeight = 340;
+        maxHeight = 360;
         break;
       case 7:
         minHeight = 200;
@@ -355,6 +355,70 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 16),
+        // CTA Button
+        Container(
+          width: double.infinity,
+          height: 50,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(25),
+          ),
+        ),
+      ];
+    }
+
+    if (widget.styleIndex == 6) {
+      return [
+        // Header Row (Icon + Text Column)
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 45,
+              height: 45,
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(height: 18, color: baseColor),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: baseColor,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(child: Container(height: 14, color: baseColor)),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        // Media View Skeleton
+        Container(
+          width: double.infinity,
+          height: 180,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(16),
+          ),
         ),
         const SizedBox(height: 16),
         // CTA Button
