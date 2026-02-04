@@ -59,6 +59,7 @@
                     android:layout_height="36dp"
                     android:backgroundTint="#D32F2F"
                     android:text="OPEN"
+                    android:background="@drawable/cta_round_bg"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold" />

@@ -50,14 +50,9 @@ class MyNativeAdFactory(private val layoutInflater: LayoutInflater, private val 
             adView.iconView?.visibility = View.VISIBLE
         }
 
-        // Rating
-        adView.starRatingView = adView.findViewById(R.id.ad_stars)
-        if (nativeAd.starRating == null) {
-            adView.starRatingView?.visibility = View.INVISIBLE
-        } else {
-            (adView.starRatingView as? RatingBar)?.rating = nativeAd.starRating!!.toFloat()
-            adView.starRatingView?.visibility = View.VISIBLE
-        }
+        // Star Rating (Removed as not present in layouts)
+        // adView.starRatingView = adView.findViewById(R.id.ad_stars)
+        // (adView.starRatingView as? RatingBar)?.rating = nativeAd.starRating!!.toFloat()
 
         // Advertiser
         adView.advertiserView = adView.findViewById(R.id.ad_advertiser)

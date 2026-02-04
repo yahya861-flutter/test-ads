@@ -100,8 +100,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 370;
         break;
       case 8:
-        minHeight = 80;
-        maxHeight = 120;
+        minHeight = 340;
+        maxHeight = 360;
         break;
       case 9:
         minHeight = 100;
@@ -120,7 +120,9 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       decoration: BoxDecoration(
         color: widget.isDark ? const Color(0xFF121212) : Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: widget.styleIndex == 8 
+            ? BorderRadius.zero 
+            : BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -526,6 +528,81 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         ),
       ];
     }
+    if (widget.styleIndex == 8) {
+      return [
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.zero,
+            border: Border.all(color: baseColor.withOpacity(0.1)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top Row: AD Badge
+              Padding(
+                padding: const EdgeInsets.only(left: 12, top: 8),
+                child: Container(
+                  width: 30,
+                  height: 16,
+                  decoration: BoxDecoration(
+                    color: baseColor,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ),
+              // Header Row: Icon + Texts
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      color: baseColor,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(height: 18, color: baseColor),
+                          const SizedBox(height: 6),
+                          Container(width: 150, height: 14, color: baseColor),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Media View
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Container(
+                  width: double.infinity,
+                  height: 180,
+                  color: baseColor,
+                ),
+              ),
+              // CTA Button
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 54,
+                  decoration: BoxDecoration(
+                    color: baseColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
+
 
     // Default shimmer content
     return [
