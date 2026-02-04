@@ -120,12 +120,14 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       decoration: BoxDecoration(
         color: widget.isDark 
-            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : const Color(0xFF121212)) 
+            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : 
+               widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
+               const Color(0xFF121212)) 
             : Colors.white,
-        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 8)
+        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
-        boxShadow: (widget.styleIndex == 0 || widget.styleIndex == 8)
+        boxShadow: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
             ? [] // No shadow for squared/flat designs to match XML background
             : [
                 BoxShadow(
@@ -162,9 +164,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
       height: maxHeight,
       decoration: BoxDecoration(
         color: widget.isDark 
-            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : const Color(0xFF121212)) 
+            ? (widget.styleIndex == 8 ? const Color(0xFF111827) : 
+               widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
+               const Color(0xFF121212)) 
             : Colors.white,
-        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 8)
+        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
       ),
@@ -176,6 +180,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: (widget.styleIndex == 0 || 
+                                widget.styleIndex == 4 || 
                                 widget.styleIndex == 7 || 
                                 widget.styleIndex == 8) 
                 ? MainAxisAlignment.start 
@@ -457,7 +462,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 2), // Match XML marginTop="2dp"
                   // Body
                   Container(
                     width: double.infinity,
