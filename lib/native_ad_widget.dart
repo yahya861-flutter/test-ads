@@ -168,6 +168,47 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                      widget.styleIndex == 7 || 
                      widget.styleIndex == 8) ? 0.0 : 12.0;
 
+    Widget shimmerBody = Shimmer.fromColors(
+      baseColor: baseColor,
+      highlightColor: highlightColor,
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: (widget.styleIndex == 0 || 
+                              widget.styleIndex == 1 || 
+                              widget.styleIndex == 2 || 
+                              widget.styleIndex == 4 || 
+                              widget.styleIndex == 7 || 
+                              widget.styleIndex == 8) 
+              ? MainAxisAlignment.start 
+              : MainAxisAlignment.center,
+          children: _buildShimmerContent(baseColor),
+        ),
+      ),
+    );
+
+    // Style 0 (Design 1) logic: Use a nested card background to avoid whole-card shimmer
+    if (widget.styleIndex == 0) {
+      return Container(
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+        height: maxHeight,
+        decoration: BoxDecoration(
+          color: widget.isDark ? const Color(0xFF000000) : const Color(0xFFEDEFF2),
+          borderRadius: BorderRadius.zero,
+        ),
+        child: Container(
+          margin: widget.isDark ? const EdgeInsets.all(8) : EdgeInsets.zero,
+          padding: const EdgeInsets.all(12),
+          decoration: widget.isDark ? BoxDecoration(
+            color: const Color(0xFF1E1E1E),
+            borderRadius: BorderRadius.circular(12),
+          ) : null,
+          child: shimmerBody,
+        ),
+      );
+    }
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
       height: maxHeight,
@@ -175,104 +216,66 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         color: widget.isDark 
             ? (widget.styleIndex == 8 ? const Color(0xFF111827) : 
                widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
-               widget.styleIndex == 0 ? const Color(0xFF000000) :
                const Color(0xFF121212)) 
-            : (widget.styleIndex == 0 ? const Color(0xFFEDEFF2) : Colors.white),
-        borderRadius: (widget.styleIndex == 0 || 
-                       widget.styleIndex == 1 || 
+            : Colors.white,
+        borderRadius: (widget.styleIndex == 1 || 
                        widget.styleIndex == 2 || 
                        widget.styleIndex == 4 || 
                        widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
       ),
-      child: Shimmer.fromColors(
-        baseColor: baseColor,
-        highlightColor: highlightColor,
-        child: Padding(
-          padding: EdgeInsets.all(padding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: (widget.styleIndex == 0 || 
-                                widget.styleIndex == 1 || 
-                                widget.styleIndex == 2 || 
-                                widget.styleIndex == 4 || 
-                                widget.styleIndex == 7 || 
-                                widget.styleIndex == 8) 
-                ? MainAxisAlignment.start 
-                : MainAxisAlignment.center,
-            children: _buildShimmerContent(baseColor),
-          ),
-        ),
-      ),
+      child: shimmerBody,
     );
   }
 
   List<Widget> _buildShimmerContent(Color baseColor) {
     if (widget.styleIndex == 0) {
       return [
-        Container(
-          margin: widget.isDark ? const EdgeInsets.all(8) : EdgeInsets.zero,
-          padding: const EdgeInsets.all(12),
-          decoration: widget.isDark ? BoxDecoration(
-            color: const Color(0xFF1E1E1E), // Match dark_card_bg color roughly
-            borderRadius: BorderRadius.circular(8),
-          ) : null,
-          child: Column(
-            children: [
-              // Header Section
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: baseColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Container(
-                    width: 120,
-                    height: 18,
-                    color: baseColor,
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: 25,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      color: baseColor,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 6),
-                  Container(
-                    width: 60,
-                    height: 14,
-                    color: baseColor,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              // Media Section
-              Container(
-                width: double.infinity,
-                height: 120,
+        // Header Section
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
                 color: baseColor,
+                shape: BoxShape.circle,
               ),
-              const SizedBox(height: 12),
-              // CTA Button
-              Container(
-                width: double.infinity,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: widget.isDark ? baseColor : const Color(0xFFE91E63),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+            ),
+            const SizedBox(width: 10),
+            Container(
+              width: 120,
+              height: 18,
+              color: baseColor,
+            ),
+            const Spacer(),
+            Container(
+              width: 32,
+              height: 16,
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(2),
               ),
-            ],
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Media Section
+        Container(
+          width: double.infinity,
+          height: 120,
+          color: baseColor,
+        ),
+        const SizedBox(height: 12),
+        // CTA Button
+        Container(
+          width: double.infinity,
+          height: 48,
+          decoration: BoxDecoration(
+            color: widget.isDark ? baseColor : const Color(0xFFE91E63),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ];
