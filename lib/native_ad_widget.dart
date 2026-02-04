@@ -72,8 +72,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 270;
         break;
       case 1:
-        minHeight = 150;
-        maxHeight = 150;
+        minHeight = 120;
+        maxHeight = 180;
         break;
       case 2:
         minHeight = 250;

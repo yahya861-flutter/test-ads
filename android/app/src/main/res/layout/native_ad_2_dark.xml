@@ -3,14 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#121212"
-    android:padding="8dp">
+    android:background="#121212">
 
-    <!-- ONE HORIZONTAL ROW -->
+    <!-- TOP DIVIDER -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444444"/> <!-- Darker gray for contrast -->
+
+    <!-- CONTENT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="0dp">
 
         <!-- AD BADGE -->
         <TextView
@@ -61,8 +67,7 @@
                 android:textColor="#FFFFFF"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:gravity="center"
-           />
+                android:gravity="center"/>
 
             <Button
                 android:id="@+id/ad_call_to_action"
@@ -78,4 +83,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <!-- BOTTOM DIVIDER -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444444"/>
+
 </com.google.android.gms.ads.nativead.NativeAdView>

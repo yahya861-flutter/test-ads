@@ -2,17 +2,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:padding="8dp">
+    android:background="#FFFFFF">
 
-    <!-- ONE HORIZONTAL ROW -->
+    <!-- TOP DIVIDER -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
+    <!-- CONTENT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-      >
+        android:padding="0dp">
 
-        <!-- AD BADGE (LEFT) -->
+        <!-- AD BADGE -->
         <TextView
             android:id="@+id/ad_badge"
             android:layout_width="wrap_content"
@@ -25,7 +30,7 @@
             android:paddingVertical="3dp"
             android:layout_marginEnd="15dp"/>
 
-        <!-- MEDIA (CENTER-LEFT) -->
+        <!-- MEDIA -->
         <com.google.android.gms.ads.nativead.MediaView
             android:id="@+id/ad_media"
             android:layout_width="120dp"
@@ -33,7 +38,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"/>
 
-        <!-- TEXT + BUTTON (RIGHT) -->
+        <!-- TEXT + BUTTON -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -57,12 +62,11 @@
                 android:id="@+id/ad_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textColor="#000000"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:gravity="center"
-               />
+                android:gravity="center"/>
 
             <Button
                 android:id="@+id/ad_call_to_action"
@@ -72,10 +76,17 @@
                 android:text="Open"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
-                android:elevation="6dp"
                 android:textStyle="bold"
+                android:elevation="6dp"
+                android:stateListAnimator="@null"
                 android:background="@drawable/cta_round_bg"/>
         </LinearLayout>
-
     </LinearLayout>
+
+    <!-- BOTTOM DIVIDER -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
+
 </com.google.android.gms.ads.nativead.NativeAdView>
