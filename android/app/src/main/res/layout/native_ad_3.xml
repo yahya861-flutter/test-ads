@@ -33,7 +33,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="3dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:layout_marginTop="12dp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:maxLines="1"
@@ -75,8 +76,13 @@
                 android:layout_marginTop="2dp"
                 android:textSize="12sp"
                 android:textColor="#444444"
-                android:maxLines="2"
-                android:ellipsize="end"/>
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:duplicateParentState="true"/>
 
             <TextView
                 android:id="@+id/ad_advertiser"
