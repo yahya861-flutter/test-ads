@@ -153,9 +153,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     final baseColor = widget.isDark ? Colors.grey[900]! : Colors.grey[300]!;
     final highlightColor = widget.isDark ? Colors.grey[800]! : Colors.grey[100]!;
     
-    // Styles 0, 7, and 8 use 0dp root padding in XML to allow components to touch edges
+    // Styles 0, 1, 2, 7, and 8 use 0dp root padding in XML
     final padding = (widget.styleIndex == 4 || 
                      widget.styleIndex == 0 || 
+                     widget.styleIndex == 1 || 
+                     widget.styleIndex == 2 || 
                      widget.styleIndex == 7 || 
                      widget.styleIndex == 8) ? 0.0 : 12.0;
 
@@ -168,7 +170,11 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                widget.styleIndex == 4 ? const Color(0xFF0F171E) : 
                const Color(0xFF121212)) 
             : Colors.white,
-        borderRadius: (widget.styleIndex == 0 || widget.styleIndex == 4 || widget.styleIndex == 8)
+        borderRadius: (widget.styleIndex == 0 || 
+                       widget.styleIndex == 1 || 
+                       widget.styleIndex == 2 || 
+                       widget.styleIndex == 4 || 
+                       widget.styleIndex == 8)
             ? BorderRadius.zero 
             : BorderRadius.circular(10),
       ),
@@ -180,6 +186,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: (widget.styleIndex == 0 || 
+                                widget.styleIndex == 1 || 
+                                widget.styleIndex == 2 || 
                                 widget.styleIndex == 4 || 
                                 widget.styleIndex == 7 || 
                                 widget.styleIndex == 8) 
@@ -253,7 +261,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
     if (widget.styleIndex == 1) {
       return [
         // Top Divider
-        Container(width: double.infinity, height: 1, color: baseColor),
+        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
         const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,23 +275,22 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(width: 15),
+            const SizedBox(width: 8), // Gap to Media
             // Media
             Container(
               width: 120,
               height: 120,
+              margin: const EdgeInsets.only(top: 10, right: 10),
               color: baseColor,
             ),
-            const SizedBox(width: 10),
             // Text + Button Pillar
             Expanded(
               child: Column(
                 children: [
+                  const SizedBox(height: 10),
                   Container(height: 18, color: baseColor),
                   const SizedBox(height: 8),
                   Container(height: 14, color: baseColor),
-                  const SizedBox(height: 4),
-                  Container(width: 80, height: 14, color: baseColor),
                   const SizedBox(height: 25),
                   Container(
                     width: 120,
@@ -300,15 +307,24 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         ),
         const SizedBox(height: 10),
         // Bottom Divider
-        Container(width: double.infinity, height: 1, color: baseColor),
+        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
       ];
     }
 
     if (widget.styleIndex == 2) {
       return [
         // Top Divider
-        Container(width: double.infinity, height: 1, color: baseColor),
-        const SizedBox(height: 8),
+        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
+        const SizedBox(height: 4),
+        // Ad Badge (inside RelativeLayout in XML, but here at top of content is fine)
+        Container(
+          width: 32,
+          height: 16,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -316,7 +332,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
             Container(
               width: 50,
               height: 50,
-              margin: const EdgeInsets.only(left: 15, right: 10),
+              margin: const EdgeInsets.only(left: 15, right: 10, top: 3),
               decoration: BoxDecoration(
                 color: baseColor,
                 borderRadius: BorderRadius.circular(20),
@@ -347,7 +363,7 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         ),
         const SizedBox(height: 8),
         // Bottom Divider
-        Container(width: double.infinity, height: 1, color: baseColor),
+        Container(width: double.infinity, height: 1, color: baseColor.withOpacity(0.5)),
       ];
     }
 
