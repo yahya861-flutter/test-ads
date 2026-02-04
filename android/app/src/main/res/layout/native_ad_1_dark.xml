@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/dark_card_bg"
-        android:padding="12dp"
+        android:padding="10dp"
         android:layout_margin="8dp">
 
         <RelativeLayout
@@ -90,7 +90,8 @@
         <Button
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="45dp"
+
             android:background="@drawable/btn_premium_bg"
             android:text="DOWNLOAD"
             android:textColor="#FFFFFF"

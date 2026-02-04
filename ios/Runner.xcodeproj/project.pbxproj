@@ -8,13 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		01ADA57A9B94E2CD76C30A52 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25024E74697136615EFCC88 /* Pods_Runner.framework */; };
+		06CEDE87B42E82024ADA99CA /* NativeAdDesign2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AD4B9D5C0307A3F69A66E3 /* NativeAdDesign2.swift */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
+		392FE1F9749CBD6B5FAD9B9C /* NativeAdDesign3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF58148FB0A11026BEB775C /* NativeAdDesign3.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		48FA08D3957682A3BA5FF81F /* NativeAdDesign1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E017F2FCFFCD208673CBF179 /* NativeAdDesign1.swift */; };
+		5D8148974C77730BFEA13EBF /* NativeAdDesign5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD912A62B9A9124BE04D6AB6 /* NativeAdDesign5.swift */; };
+		66E813F59DF6455B318F715C /* NativeAdDesign8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF171485B23F6DB48031F8E /* NativeAdDesign8.swift */; };
+		6D003E07597A5BDAC6CB4E0F /* NativeAdDesign7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B3101144A69DA9E19C8B3A /* NativeAdDesign7.swift */; };
+		6F5419BA6F83764E47BAD7E6 /* NativeAdDesign4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3542C691852582AD92398C /* NativeAdDesign4.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		8802FCF09A14305D2D29AE54 /* NativeAdDesign6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E0A107DB9E3D8E46204BE2 /* NativeAdDesign6.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		C5C39A2BB146F7C177960CD9 /* NativeAdDesign9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2168C4940ABB8DCD12A1547F /* NativeAdDesign9.swift */; };
+		CD108CBC3DBB57318190938E /* NativeAdDesign10.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0895D792F0D8C0ABA4F3CC4 /* NativeAdDesign10.swift */; };
 		CFDFF2C605F7C0CAEBC075EE /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF7DBD1640D89F40D3C2036D /* Pods_RunnerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,17 +53,24 @@
 
 /* Begin PBXFileReference section */
 		00C5AF869173120BBDD8E3FC /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		12E0A107DB9E3D8E46204BE2 /* NativeAdDesign6.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign6.swift; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		2168C4940ABB8DCD12A1547F /* NativeAdDesign9.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign9.swift; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		5BF58148FB0A11026BEB775C /* NativeAdDesign3.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign3.swift; sourceTree = "<group>"; };
+		5F3542C691852582AD92398C /* NativeAdDesign4.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign4.swift; sourceTree = "<group>"; };
+		5FF171485B23F6DB48031F8E /* NativeAdDesign8.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign8.swift; sourceTree = "<group>"; };
 		64DFBFAA87721E52C84420AA /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75CBC6D333A2ACDB7E0B1821 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		79B3101144A69DA9E19C8B3A /* NativeAdDesign7.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign7.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		82B9E8E34ED20C8F2E33BD11 /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
+		94AD4B9D5C0307A3F69A66E3 /* NativeAdDesign2.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign2.swift; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,8 +78,11 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0895D792F0D8C0ABA4F3CC4 /* NativeAdDesign10.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign10.swift; sourceTree = "<group>"; };
 		AFE60907F15EEC479CC4F5F1 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		CD912A62B9A9124BE04D6AB6 /* NativeAdDesign5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign5.swift; sourceTree = "<group>"; };
 		D25024E74697136615EFCC88 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E017F2FCFFCD208673CBF179 /* NativeAdDesign1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdDesign1.swift; sourceTree = "<group>"; };
 		ED189127C4F105AF545B3F58 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		EF7DBD1640D89F40D3C2036D /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -118,6 +138,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8B2D8D26908CA648FF71F22B /* NativeAdDesigns */ = {
+			isa = PBXGroup;
+			children = (
+				CD912A62B9A9124BE04D6AB6 /* NativeAdDesign5.swift */,
+				79B3101144A69DA9E19C8B3A /* NativeAdDesign7.swift */,
+				5BF58148FB0A11026BEB775C /* NativeAdDesign3.swift */,
+				A0895D792F0D8C0ABA4F3CC4 /* NativeAdDesign10.swift */,
+				E017F2FCFFCD208673CBF179 /* NativeAdDesign1.swift */,
+				12E0A107DB9E3D8E46204BE2 /* NativeAdDesign6.swift */,
+				5F3542C691852582AD92398C /* NativeAdDesign4.swift */,
+				94AD4B9D5C0307A3F69A66E3 /* NativeAdDesign2.swift */,
+				5FF171485B23F6DB48031F8E /* NativeAdDesign8.swift */,
+				2168C4940ABB8DCD12A1547F /* NativeAdDesign9.swift */,
+			);
+			name = NativeAdDesigns;
+			path = NativeAdDesigns;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +199,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				8B2D8D26908CA648FF71F22B /* NativeAdDesigns */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -397,6 +436,16 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				5D8148974C77730BFEA13EBF /* NativeAdDesign5.swift in Sources */,
+				6D003E07597A5BDAC6CB4E0F /* NativeAdDesign7.swift in Sources */,
+				392FE1F9749CBD6B5FAD9B9C /* NativeAdDesign3.swift in Sources */,
+				CD108CBC3DBB57318190938E /* NativeAdDesign10.swift in Sources */,
+				48FA08D3957682A3BA5FF81F /* NativeAdDesign1.swift in Sources */,
+				8802FCF09A14305D2D29AE54 /* NativeAdDesign6.swift in Sources */,
+				6F5419BA6F83764E47BAD7E6 /* NativeAdDesign4.swift in Sources */,
+				06CEDE87B42E82024ADA99CA /* NativeAdDesign2.swift in Sources */,
+				66E813F59DF6455B318F715C /* NativeAdDesign8.swift in Sources */,
+				C5C39A2BB146F7C177960CD9 /* NativeAdDesign9.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
