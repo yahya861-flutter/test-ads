@@ -6,106 +6,124 @@
     android:layout_height="wrap_content"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/ad_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ad"
-        android:textSize="10sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/ad_badge_blue_bg"
-        android:paddingStart="6dp"
-        android:paddingEnd="6dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:layout_marginEnd="8dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="8dp">
+        android:orientation="vertical">
 
-        <!-- Ad Badge -->
+        <!-- TOP DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            android:clipToOutline="true">
-
-            <ImageView
-                android:id="@+id/ad_app_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- Media View (Ad Icon area) -->
-
-
-        <!-- Middle Content: Headline and Body -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/ad_headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginTop="12dp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:maxLines="1"
-                android:ellipsize="end"/>
-
-            <TextView
-                android:id="@+id/ad_body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textSize="12sp"
-                android:textColor="#444444"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:duplicateParentState="true"/>
-
-            <TextView
-                android:id="@+id/ad_advertiser"
+                android:id="@+id/ad_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Ad"
                 android:textSize="10sp"
-                android:textColor="#777777"
-                android:visibility="gone"/>
-        </LinearLayout>
+                android:textColor="#FFFFFF"
+                android:background="@drawable/ad_badge_blue_bg"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_marginEnd="8dp"/>
 
-        <!-- CTA Button -->
-        <Button
-            android:id="@+id/ad_call_to_action"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:text="OPEN"
-            android:textAllCaps="false"
-            android:textSize="14sp"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/cta_blue_pill" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    android:clipToOutline="true">
+
+                    <ImageView
+                        android:id="@+id/ad_app_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Middle Content: Headline and Body -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/ad_headline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:id="@+id/ad_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textSize="12sp"
+                        android:textColor="#000000"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:duplicateParentState="true"/>
+
+                    <TextView
+                        android:id="@+id/ad_advertiser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#777777"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <!-- CTA Button -->
+                <Button
+                    android:id="@+id/ad_call_to_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:text="OPEN"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/cta_blue_pill" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!-- BOTTOM DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"/>
 
     </LinearLayout>
 </com.google.android.gms.ads.nativead.NativeAdView>
