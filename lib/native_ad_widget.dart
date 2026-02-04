@@ -80,8 +80,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 100;
         break;
       case 3:
-        minHeight = 100;
-        maxHeight = 200;
+        minHeight = 350;
+        maxHeight = 380;
         break;
       case 4:
         minHeight = 80;
@@ -159,58 +159,118 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: baseColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 14,
-                          color: baseColor,
-                        ),
-                        const SizedBox(height: 6),
-                        Container(
-                          width: 100,
-                          height: 10,
-                          color: baseColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  color: baseColor,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: baseColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ],
+            children: _buildShimmerContent(baseColor),
           ),
         ),
       ),
     );
+  }
+
+  List<Widget> _buildShimmerContent(Color baseColor) {
+    if (widget.styleIndex == 3) {
+      return [
+        // Media placeholder
+        Container(
+          width: double.infinity,
+          height: 200,
+          color: baseColor,
+        ),
+        const SizedBox(height: 12),
+        // Icon + Headline row
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 16,
+                    color: baseColor,
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    width: 150,
+                    height: 12,
+                    color: baseColor,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        // Big CTA Button placeholder
+        Container(
+          width: double.infinity,
+          height: 56,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+      ];
+    }
+
+    // Default shimmer content
+    return [
+      Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: baseColor,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 14,
+                  color: baseColor,
+                ),
+                const SizedBox(height: 6),
+                Container(
+                  width: 100,
+                  height: 10,
+                  color: baseColor,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 16),
+      Expanded(
+        child: Container(
+          width: double.infinity,
+          color: baseColor,
+        ),
+      ),
+      const SizedBox(height: 16),
+      Container(
+        width: double.infinity,
+        height: 40,
+        decoration: BoxDecoration(
+          color: baseColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ];
   }
 }
