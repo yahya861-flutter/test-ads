@@ -88,8 +88,8 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
         maxHeight = 85;
         break;
       case 5:
-        minHeight = 100;
-        maxHeight = 140;
+        minHeight = 170;
+        maxHeight = 190;
         break;
       case 6:
         minHeight = 150;
@@ -286,6 +286,63 @@ class _NativeAdWidgetState extends State<NativeAdWidget> {
               color: baseColor,
             ),
           ],
+        ),
+      ];
+    }
+
+    if (widget.styleIndex == 5) {
+      return [
+        // Row 1: Icon + Headline
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 45,
+              height: 45,
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Container(
+                height: 18,
+                color: baseColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Row 2: Badge + Body
+        Row(
+          children: [
+            Container(
+              width: 30,
+              height: 16,
+              decoration: BoxDecoration(
+                color: baseColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Container(
+                height: 14,
+                color: baseColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        // Row 3: CTA Button
+        Container(
+          width: double.infinity,
+          height: 56,
+          decoration: BoxDecoration(
+            color: baseColor,
+            borderRadius: BorderRadius.circular(28),
+          ),
         ),
       ];
     }

@@ -1,56 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.gms.ads.nativead.NativeAdView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#121212"
-    android:padding="12dp">
+    android:background="#00000000">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#111827"
+        android:padding="16dp">
 
+        <!-- Top Section: Icon and Headline -->
         <LinearLayout
-            android:id="@+id/text_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/ad_app_icon"
-            android:orientation="vertical"
-            android:paddingEnd="12dp">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#00000000">
+                <ImageView
+                    android:id="@+id/ad_app_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/ad_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="#F3F4F6"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
+        </LinearLayout>
+
+        <!-- Middle Section: Ad Badge and Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/ad_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Ad"
+                android:textSize="12sp"
                 android:textColor="#FFFFFF"
-                android:textSize="17sp"
                 android:textStyle="bold"
-                android:ellipsize="end"
-                android:maxLines="1" />
+                android:background="@drawable/ad_badge_orange_bg"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:layout_marginEnd="10dp" />
 
             <TextView
                 android:id="@+id/ad_body"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#B0B0B0"
-                android:textSize="13sp"
-                android:ellipsize="end"
-                android:maxLines="2" />
+                android:textColor="#D1D5DB"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/ad_app_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true" />
-
+        <!-- Bottom Section: CTA Button -->
         <Button
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/text_container"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#1E9BE9"
-            android:textColor="#FFFFFF" />
-    </RelativeLayout>
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/cta_orange_pill"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
 </com.google.android.gms.ads.nativead.NativeAdView>
